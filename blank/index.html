@@ -60,13 +60,14 @@ limitations under the License.
 				y : null
 			};
 
-			function Entity(id, x, y, angle, center, color) {
+			function Entity(id, x, y, angle, center, color, imgsrc) {
 				this.id = id;
 				this.x = x;
 				this.y = y;
 				this.angle = angle || 0;
 				this.center = center;
 				this.color = color || "red";
+        this.imgsrc = imgsrc;
 			}
 
 
@@ -93,16 +94,16 @@ limitations under the License.
 
 			Entity.build = function(def) {
 				if (def.radius) {
-					return new CircleEntity(def.id, def.x, def.y, def.angle, NULL_CENTER, def.color, def.radius);
+					return new CircleEntity(def.id, def.x, def.y, def.angle, NULL_CENTER, def.color, def.radius, def.imgsrc);
 				} else if (def.polys) {
-					return new PolygonEntity(def.id, def.x, def.y, def.angle, NULL_CENTER, def.color, def.polys);
+					return new PolygonEntity(def.id, def.x, def.y, def.angle, NULL_CENTER, def.color, def.polys, def.imgsrc);
 				} else {
-					return new RectangleEntity(def.id, def.x, def.y, def.angle, NULL_CENTER, def.color, def.halfWidth, def.halfHeight);
+					return new RectangleEntity(def.id, def.x, def.y, def.angle, NULL_CENTER, def.color, def.halfWidth, def.halfHeight, def.imgsrc);
 				}
 			}
-			function CircleEntity(id, x, y, angle, center, color, radius) {
+			function CircleEntity(id, x, y, angle, center, color, radius, imgsrc) {
 				color = color || 'aqua';
-				Entity.call(this, id, x, y, angle, center, color);
+				Entity.call(this, id, x, y, angle, center, color, imgsrc);
 				this.radius = radius;
 			}
 
@@ -116,22 +117,36 @@ limitations under the License.
 				ctx.rotate(this.angle);
 				ctx.translate(-(this.x) * SCALE, -(this.y) * SCALE);
 
-				ctx.fillStyle = this.color;
-				ctx.strokeStyle = 'black';
-				ctx.beginPath();
-				ctx.arc(this.x * SCALE, this.y * SCALE, this.radius * SCALE, 0, Math.PI * 2, true);
-				ctx.moveTo(this.x * SCALE, this.y * SCALE);
-				//ctx.lineTo((this.x) * SCALE, (this.y + this.radius) * SCALE);
-				ctx.closePath();
-				ctx.fill();
-				ctx.stroke();
-
+        if (this.imgsrc)
+        {
+          $('canvas').drawImage({source: this.imgsrc,
+                                x:this.x * SCALE,
+                                y:this.y * SCALE,
+                                width:this.radius * SCALE * 2,
+                                height:this.radius * SCALE * 2
+          });
+        }
+        /*
+        else
+        {
+          ctx.fillStyle = this.color;
+          ctx.strokeStyle = 'black';
+          ctx.beginPath();
+          ctx.arc(this.x * SCALE, this.y * SCALE, this.radius * SCALE, 0, Math.PI * 2, true);
+          //ctx.moveTo(this.x * SCALE, this.y * SCALE);
+          //ctx.lineTo((this.x) * SCALE, (this.y + this.radius) * SCALE);
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+        }
+        */
+        
 				ctx.restore();
 
 				//Entity.prototype.draw.call(this, ctx);
 			}
-			function RectangleEntity(id, x, y, angle, center, color, halfWidth, halfHeight) {
-				Entity.call(this, id, x, y, angle, center, color);
+			function RectangleEntity(id, x, y, angle, center, color, halfWidth, halfHeight, imgsrc) {
+				Entity.call(this, id, x, y, angle, center, color, imgsrc);
 				this.halfWidth = halfWidth;
 				this.halfHeight = halfHeight;
 			}
@@ -146,18 +161,20 @@ limitations under the License.
 				ctx.rotate(this.angle);
 				ctx.translate(-(this.x) * SCALE, -(this.y) * SCALE);
 				ctx.fillStyle = this.color;
+      
         if (this.imgsrc)
         {
           $('canvas').drawImage({source: this.imgsrc,
-                                x:(this.x - this.halfWidth) * SCALE,
-                                y:(this.y - this.halfHeight) * SCALE,
+                                x:(this.x) * SCALE,
+                                y:(this.y) * SCALE,
                                 width:(this.halfWidth * 2) * SCALE,
                                 height:(this.halfHeight * 2) * SCALE
           });
         }
 				else
-          ctx.fillRect((this.x - this.halfWidth) * SCALE, (this.y - this.halfHeight) * SCALE, (this.halfWidth * 2) * SCALE, (this.halfHeight * 2) * SCALE);
-        ctx.restore();
+          ctx.fillRect((this.x - this.halfWidth) * SCALE,(this.y - this.halfHeight) * SCALE, (this.halfWidth * 2) * SCALE, (this.halfHeight * 2) * SCALE);
+        
+          ctx.restore();
 
 				//Entity.prototype.draw.call(this, ctx);
 			}
@@ -275,62 +292,67 @@ limitations under the License.
 			{
 				id : "torso",
 				x : 6.5,
-				y : 8,
-				halfHeight : 2,
-				halfWidth : 0.2
+				y : 7.2,
+				halfHeight : 1.1,
+				halfWidth : 1.2,
+        imgsrc: "character/body.png"
 			}, {
 				id : "head",
 				x : 6.5,
-				y : 5.2,
-				radius : 0.7
+				y : 5,
+				radius : 0.9,
+        imgsrc: "character/head.png"
 			}, {
 				id : "leftarm",
-				x : 5.65,
-				y : 7.35,
-				angle : 60,
-				halfHeight : 1.2,
-				halfWidth : 0.1,
+				x : 4.2,
+				y : 6.7,
+				angle : 1.3,
+				halfHeight : 0.9,
+				halfWidth : 0.4,
         imgsrc: "character/leftarm.png"
 			}, {
 				id : "rightarm",
-				x : 7.3,
-				y : 7.3,
-				angle : 50,
-				halfHeight : 1.2,
-				halfWidth : 0.1
+				x : 8.85,
+				y : 6.7,
+				angle : -1.3,
+				halfHeight : 0.9,
+				halfWidth : 0.4,
+        imgsrc: "character/rightarm.png"
 			}, {
 				id : "leftleg",
 				x : 5.8,
-				y : 11,
-				angle : 3.3,
-				halfHeight : 1.2,
-				halfWidth : 0.15
+				y : 9.5,
+				angle : 0,
+				halfHeight : 1.1,
+				halfWidth : 0.5,
+        imgsrc: "character/leftleg.png"
 			}, {
 				id : "rightleg",
 				x : 7.2,
-				y : 11,
-				angle : 2.92,
-				halfHeight : 1.2,
-				halfWidth : 0.15
+				y : 9.5,
+				angle : 0,
+				halfHeight : 1.1,
+				halfWidth : 0.5,
+        imgsrc: "character/rightleg.png"
 			}, {
 				id : "leftshoulder",
-				x : 6.15,
-				y : 6.3,
+				x : 5.4,
+				y : 6.4,
 				radius : 0.25
 			}, {
 				id : "rightshoulder",
-				x : 6.85,
-				y : 6.3,
+				x : 7.6,
+				y : 6.5,
 				radius : 0.25
 			}, {
 				id : "lefthip",
-				x : 6.15,
-				y : 9.95,
+				x : 5.4,
+				y : 8.2,
 				radius : 0.3
 			}, {
 				id : "righthip",
-				x : 6.85,
-				y : 9.95,
+				x : 7.6,
+				y : 8,
 				radius : 0.3
 			}];
 
