@@ -27,17 +27,246 @@ app.get('/', function(req, res){
 // Box2djs depends on jQuery.extend
 // jQuery needs a window object to add certain functions to, a window which Node.js does not have.
 // Solution: import just jQuery.extend
+
 var jQuery = require('./public/javascripts/jquery-extend.js');
 Object.extend = jQuery.extend; // this is the feature box2d needs
 var b2 = require('./public/javascripts/box2d.js');
-
+ 
 // Box2D world
+ 
 var worldAABB = new b2.b2AABB();
 worldAABB.minVertex.Set(-1000, -1000);
 worldAABB.maxVertex.Set(1000, 1000);
 var gravity = new b2.b2Vec2(0, 400);
 var b2world = new b2.b2World(worldAABB, gravity, true);
 var groundBody = b2world.GetBodyList();
+ 
+//belly
+var ballSd = new b2.b2CircleDef();
+ballSd.density = 1.0;
+ballSd.radius = 50;
+var ballBd = new b2.b2BodyDef();
+ballBd.AddShape(ballSd);
+ballBd.position.Set(0,0);
+ballBd.allowSleep = false;
+var belly = b2world.CreateBody(ballBd);
+ 
+//right upper leg
+var ballSd = new b2.b2BoxDef();
+ballSd.density = 1.0;
+ballSd.extents.Set(5,40);
+var ballBd = new b2.b2BodyDef();
+ballBd.AddShape(ballSd);
+ballBd.position.Set(35,80);
+ballBd.allowSleep = false;
+var right_upper_leg = b2world.CreateBody(ballBd)
+ 
+//left upper leg
+var ballSd = new b2.b2BoxDef();
+ballSd.density = 1.0;
+ballSd.extents.Set(5,40);
+var ballBd = new b2.b2BodyDef();
+ballBd.AddShape(ballSd);
+ballBd.position.Set(-35,80);
+ballBd.allowSleep = false;
+var left_upper_leg = b2world.CreateBody(ballBd)
+ 
+//right lower leg
+var ballSd = new b2.b2BoxDef();
+ballSd.density = 1.0;
+ballSd.extents.Set(5,30);
+var ballBd = new b2.b2BodyDef();
+ballBd.AddShape(ballSd);
+ballBd.position.Set(35,150);
+ballBd.allowSleep = false;
+var right_lower_leg = b2world.CreateBody(ballBd)
+ 
+//left lower leg
+var ballSd = new b2.b2BoxDef();
+ballSd.density = 1.0;
+ballSd.extents.Set(5,30);
+var ballBd = new b2.b2BodyDef();
+ballBd.AddShape(ballSd);
+ballBd.position.Set(-35,150);
+ballBd.allowSleep = false;
+var left_lower_leg = b2world.CreateBody(ballBd)
+ 
+//right foot
+var ballSd = new b2.b2BoxDef();
+ballSd.density = 1.0;
+ballSd.extents.Set(20,10);
+var ballBd = new b2.b2BodyDef();
+ballBd.AddShape(ballSd);
+ballBd.position.Set(50,190);
+ballBd.allowSleep = false;
+var right_foot = b2world.CreateBody(ballBd)
+ 
+//left foot
+var ballSd = new b2.b2BoxDef();
+ballSd.density = 1.0;
+ballSd.extents.Set(20,10);
+var ballBd = new b2.b2BodyDef();
+ballBd.AddShape(ballSd);
+ballBd.position.Set(-50,190);
+ballBd.allowSleep = false;
+var left_foot = b2world.CreateBody(ballBd)
+ 
+//right upper arm
+var ballSd = new b2.b2BoxDef();
+ballSd.density = 1.0;
+ballSd.extents.Set(40,5);
+var ballBd = new b2.b2BodyDef();
+ballBd.AddShape(ballSd);
+ballBd.position.Set(80,-30);
+ballBd.allowSleep = false;
+var right_upper_arm = b2world.CreateBody(ballBd)
+ 
+//left upper arm
+var ballSd = new b2.b2BoxDef();
+ballSd.density = 1.0;
+ballSd.extents.Set(40,5);
+var ballBd = new b2.b2BodyDef();
+ballBd.AddShape(ballSd);
+ballBd.position.Set(-80,-30);
+ballBd.allowSleep = false;
+var left_upper_arm = b2world.CreateBody(ballBd)
+ 
+//right lower arm
+var ballSd = new b2.b2BoxDef();
+ballSd.density = 1.0;
+ballSd.extents.Set(20,5);
+var ballBd = new b2.b2BodyDef();
+ballBd.AddShape(ballSd);
+ballBd.position.Set(140,-30);
+ballBd.allowSleep = false;
+var right_lower_arm = b2world.CreateBody(ballBd)
+ 
+//left lower arm
+var ballSd = new b2.b2BoxDef();
+ballSd.density = 1.0;
+ballSd.extents.Set(20,5);
+var ballBd = new b2.b2BodyDef();
+ballBd.AddShape(ballSd);
+ballBd.position.Set(-140,-30);
+ballBd.allowSleep = false;
+var left_lower_arm = b2world.CreateBody(ballBd)
+ 
+//left hand
+var ballSd = new b2.b2CircleDef();
+ballSd.density = 1.0;
+ballSd.radius = 20;
+var ballBd = new b2.b2BodyDef();
+ballBd.AddShape(ballSd);
+ballBd.position.Set(-160,-30);
+ballBd.allowSleep = false;
+var left_hand = b2world.CreateBody(ballBd);
+ 
+//right hand
+var ballSd = new b2.b2CircleDef();
+ballSd.density = 1.0;
+ballSd.radius = 20;
+var ballBd = new b2.b2BodyDef();
+ballBd.AddShape(ballSd);
+ballBd.position.Set(160,-30);
+ballBd.allowSleep = false;
+var right_hand = b2world.CreateBody(ballBd);
+ 
+//head
+var ballSd = new b2.b2CircleDef();
+//ballSd.density = 1.0;
+ballSd.radius = 30;
+var ballBd = new b2.b2BodyDef();
+ballBd.AddShape(ballSd);
+ballBd.position.Set(0,-75);
+ballBd.allowSleep = false;
+var head = b2world.CreateBody(ballBd);
+ 
+//joints
+var jd = new b2.b2RevoluteJointDef();
+jd.anchorPoint.Set(35, 50);
+jd.body1 = belly;
+jd.body2 = right_upper_leg;
+b2world.CreateJoint(jd);
+ 
+var jd = new b2.b2RevoluteJointDef();
+jd.anchorPoint.Set(-35, 50);
+jd.body1 = belly;
+jd.body2 = left_upper_leg;
+b2world.CreateJoint(jd);
+ 
+var jd = new b2.b2RevoluteJointDef();
+jd.anchorPoint.Set(35, 130);
+jd.body1 = right_upper_leg;
+jd.body2 = right_lower_leg;
+b2world.CreateJoint(jd);
+ 
+var jd = new b2.b2RevoluteJointDef();
+jd.anchorPoint.Set(-35, 130);
+jd.body1 = left_upper_leg;
+jd.body2 = left_lower_leg;
+b2world.CreateJoint(jd);
+ 
+var jd = new b2.b2RevoluteJointDef();
+jd.anchorPoint.Set(-35, 190);
+jd.body1 = left_foot;
+jd.body2 = left_lower_leg;
+jd.lowerAngle = 0;
+jd.upperAngle = 0;
+jd.enableLimit = true;
+b2world.CreateJoint(jd);
+ 
+var jd = new b2.b2RevoluteJointDef();
+jd.anchorPoint.Set(35, 190);
+jd.body1 = right_foot;
+jd.body2 = right_lower_leg;
+jd.lowerAngle = 0;
+jd.upperAngle = 0;
+jd.enableLimit = true;
+b2world.CreateJoint(jd);
+ 
+var jd = new b2.b2RevoluteJointDef();
+jd.anchorPoint.Set(40, -30);
+jd.body1 = belly;
+jd.body2 = right_upper_arm;
+b2world.CreateJoint(jd);
+ 
+var jd = new b2.b2RevoluteJointDef();
+jd.anchorPoint.Set(-40, -30);
+jd.body1 = belly;
+jd.body2 = left_upper_arm;
+b2world.CreateJoint(jd);
+ 
+var jd = new b2.b2RevoluteJointDef();
+jd.anchorPoint.Set(-120, -30);
+jd.body1 = left_lower_arm;
+jd.body2 = left_upper_arm;
+b2world.CreateJoint(jd);
+ 
+var jd = new b2.b2RevoluteJointDef();
+jd.anchorPoint.Set(120, -30);
+jd.body1 = right_lower_arm;
+jd.body2 = right_upper_arm;
+b2world.CreateJoint(jd);
+ 
+var jd = new b2.b2RevoluteJointDef();
+jd.anchorPoint.Set(160, -30);
+jd.body1 = right_lower_arm;
+jd.body2 = right_hand;
+b2world.CreateJoint(jd);
+ 
+var jd = new b2.b2RevoluteJointDef();
+jd.anchorPoint.Set(-160, -30);
+jd.body1 = left_lower_arm;
+jd.body2 = left_hand;
+b2world.CreateJoint(jd);
+ 
+var jd = new b2.b2RevoluteJointDef();
+jd.anchorPoint.Set(0, -50);
+jd.body1 = belly;
+jd.body2 = head;
+b2world.CreateJoint(jd);
+
+/*
 for(var i=0; i<10; i++){
     var ballSd = new b2.b2BoxDef();
     ballSd.density = 1.0;
@@ -50,6 +279,7 @@ for(var i=0; i<10; i++){
     ballBd.allowSleep = false;
     b2world.CreateBody(ballBd);
 }
+*/
 
 // Creates a static box2d box at x,y with size w,h
 function createStaticBox(x,y,w,h){
