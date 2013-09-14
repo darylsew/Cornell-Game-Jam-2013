@@ -292,31 +292,10 @@
 					if (Math.abs(accel) > 1.5)
 						awakeness = Math.max(0, awakeness -= 0.5 * Math.abs(accel));
 				}
-
                                 
-                                //clickX.length = 0;
-                                //clickY.length = 0;
-                                //clickDrag.length = 0;
-				//ctx.clearRect(-3*canvasWidth, -3*canvasHeight, 3*canvasWidth, 3*canvasHeight);
-
-                                
-                                ctx.save();
-                                ctx.setTransform(1, 0, 0, 1, 0, 0);
+                ctx.save();
+                ctx.setTransform(1, 0, 0, 1, 0, 0);
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
-                                ctx.restore();
-
-                                for (var id in world) {
-                                    if (isConstant(world[id])) {
-                                        ctx.translate(.05, 0);
-                                        var entity = world[id];
-                                        entity.draw(ctx);
-                                    }
-                                    else {
-                                        ctx.translate(-.05, 0);
-                                        var entity = world[id];
-                                        entity.draw(ctx);
-                                    }
-                                }
 				$('canvas').drawRect({
 					fillStyle : "#3B5323",
 					x : 400,
@@ -331,6 +310,20 @@
 					width : 64 / 10,
 					height : 18
 				});
+                ctx.restore();
+
+                for (var id in world) {
+                    if (isConstant(world[id])) {
+                        ctx.translate(.05, 0);
+                        var entity = world[id];
+                        entity.draw(ctx);
+                    }
+                    else {
+                        ctx.translate(-.05, 0);
+                        var entity = world[id];
+                        entity.draw(ctx);
+                    }
+                }
 			}
 
 			var initialState = [
