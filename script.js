@@ -4,7 +4,10 @@ var context = canvas.getContext('2d');
 //enviornment vars
 var mousePos = {x:0,y:0};
 var backwidth = 1600;
-var backpos = 0;
+var backpos = backwidth/2;
+var charPos = {x:400, y:300}
+var block = {x:900, y:400};
+var objects = [block];
 
 function draw()
 {
@@ -13,6 +16,24 @@ function draw()
     $("canvas").drawImage({
         source: "resources/testbackground.jpg",
         x: backpos, y: 300
+    });
+
+    $("canvas").drawArc({
+        strokeStyle: "#000",
+        fillStyle: "red",
+        strokeWidth: 2,
+        x: charPos.x, y: charPos.y,
+        radius: 50
+    });
+
+    // Draw a polygon
+    $("canvas").drawPolygon({
+      fillStyle: "#589",
+      strokeStyle: "#000",
+      x: block.x+backpos-backwidth/2, y: block.y,
+      radius: 50,
+      sides: 4,
+      rotate: 25
     });
 }
 
