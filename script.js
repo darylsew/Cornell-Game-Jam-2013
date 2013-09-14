@@ -29,7 +29,7 @@ function draw() {
     ctx.save();
     ctx.translate(offsetX, offsetY);
     // clear the viewport
-    ctx.clearRect(-offsetX, -offsetY, 100,100);
+    ctx.clearRect(-offsetX, -offsetY, 800,600);
     
     // draw the player
     ctx.fillStyle = 'red';
