@@ -507,12 +507,12 @@
           if (!lost)
           {
             var bobx = world['torso'].x - backgroundPos/SCALE;
-            console.log(world['torso'].x - backgroundPos/SCALE);
+            console.log(world['torso'].y / SCALE);
             var boby = world['torso'].y / SCALE;
-            //if (bobx<0 || boby>1 )
-            //{
-              //  lost = true;
-            //}
+            if (bobx<-2 || boby>1 )
+            {
+            	lost = true;
+            }
             if (awakeness<=0) lost = true;
           }
       }
