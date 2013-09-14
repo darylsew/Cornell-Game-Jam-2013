@@ -515,6 +515,7 @@ limitations under the License.
 			var prevVeloc = 0;
 			var prevX = 6.5;
 			var prevY = 5.2;
+			var awakeness = 90;
 
 			function draw() {
 
@@ -561,7 +562,22 @@ limitations under the License.
 				halfHeight : 4,
 				halfWidth : 0.5,
 				color : '#DBC696'
+			}, {
+				id : "maxHP",
+				x : canvasWidth *.5 / SCALE,
+				y : canvasHeight / SCALE - .5,
+				halfHeight : .3,
+				halfWidth : canvasWidth *.4 / SCALE,
+				color : "#4F0"
+			}, {
+				id : "currHP",
+				x : canvasWidth *.5 / SCALE,
+				y : canvasHeight / SCALE - .5,
+				halfHeight : .3,
+				halfWidth : canvasWidth *.4 * awakeness / 100 / SCALE,
+				color : "#3B5323"
 			},
+
 
 			//character
 			{
