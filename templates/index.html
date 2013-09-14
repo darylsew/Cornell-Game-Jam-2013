@@ -35,10 +35,11 @@
 					mousePos = getMousePos(canvas, evt);
 					var backx = 400 - mousePos.x;
 					var backy = 300 - mousePos.y;
-					$("canvas").drawImage({
-					  source: "/static/assets/transparentbg.png",
-					  x: backx/10 - 100, y: backy/10 - 200
-					});
+			    	var imageObj = new Image();
+			    	imageObj.onload = function() {
+			        	context.drawImage(imageObj, 69, 50);
+			    	};
+			    	imageObj.src = '/static/assets/transparentbg.png';
 					//url("../assets/transparentbg2.png")
 				}, false);
 			});
