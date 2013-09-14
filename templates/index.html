@@ -501,8 +501,9 @@
 
           if (lost)
           {
-              box.removeBody('torso');
-              delete world['torso'];
+          		awakeness=0;
+            	box.removeBody('torso');
+            	delete world['torso'];
           }
           requestAnimFrame(loop);
 				})();
