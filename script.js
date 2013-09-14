@@ -3,12 +3,13 @@ var context = canvas.getContext('2d');
 
 //enviornment vars
 var mousePos = {x:0,y:0};
+var backwidth = 1600;
 var backpos = 0;
 
 function draw()
 {
     var newX = backpos + getDbackpos();
-    backpos = ((newX<0) ? 0 : ((newX>800) ? 800 : newX));
+    backpos = ((newX<0) ? 0 : ((newX>backwidth/2) ? backwidth/2 : newX));
     $("canvas").drawImage({
         source: "resources/testbackground.jpg",
         x: backpos, y: 300
