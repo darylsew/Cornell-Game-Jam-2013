@@ -6,7 +6,7 @@ var mousePos = {x:0,y:0};
 var backwidth = 1600;
 var backpos = backwidth/2;
 var charPos = {x:400, y:300}
-var block = {x:900, y:400};
+var block = {x:900, y:380};
 var objects = [block];
 
 function draw()
