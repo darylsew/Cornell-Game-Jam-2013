@@ -233,12 +233,14 @@
 					nowX = box.bodiesMap.head.m_xf.position.x;
 					nowY = box.bodiesMap.head.m_xf.position.y;
 					nowVeloc = Math.pow(Math.pow(nowX - prevX, 2) + Math.pow(nowY - prevY, 2), 1 / 2);
+					prevX = nowX;
+					prevY = nowY;
 					dVeloc = nowVeloc - prevVeloc;
 					prevVeloc = nowVeloc;
 					accel = 1000*dVeloc / dTime;
 					awakeness = Math.min(100, awakeness + .03);
-					if (Math.abs(accel) > 10)
-						awakeness = Math.max(0, awakeness -= .05 * Math.abs(accel));
+					if (Math.abs(accel) > 1)
+						awakeness = Math.max(0, awakeness -= 1 * Math.abs(accel));
 				}
 
 				ctx.clearRect(0, 0, canvasWidth, canvasHeight);
