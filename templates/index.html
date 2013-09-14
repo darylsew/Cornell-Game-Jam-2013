@@ -314,17 +314,17 @@
                 ctx.save();
                 ctx.setTransform(1, 0, 0, 1, 0, 0);
                 $('canvas').drawRect({
-					fillStyle : "#3B5323",
-					x : 400,
-					y : 585,
-					width : 640 * awakeness / 100,
-					height : 18
-				});
-				$('canvas').drawRect({
 					fillStyle : "#F00",
 					x : 400,
 					y : 585,
 					width : 640,
+					height : 18
+				});
+                $('canvas').drawRect({
+					fillStyle : "#3B5323",
+					x : 400,
+					y : 585,
+					width : 640 * awakeness / 100,
 					height : 18
 				});
                 ctx.restore();
