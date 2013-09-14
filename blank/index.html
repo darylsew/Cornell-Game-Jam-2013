@@ -20,15 +20,18 @@ limitations under the License.
     <title>Sleepy Game</title>
     <script src="Box2D.js"></script>
     <script src="bTest.js"></script>
+    <script src="jquery.js"></script>
+    <script src="jcanvas.min.js"></script>
     <style>
         * { margin: 0; padding: 0; }
         body { background-color: #CEE3F6; -webkit-transform: translateZ(0); }
-        canvas { margin: 50px auto 0 auto; display: block; width: 800px; height: 600px; background-color: #CDBEA7;}
+        canvas { margin: 50px auto 0 auto; display: block; width: 800px; height: 600px; background: url("simplebg.png");}
     </style>
   </head>
   <body>
     <canvas id="c0" width="800" height="600" style="border: 1px solid black"></canvas>
-  
+    <script src="script.js"></script>
+
     <script async>
     // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
     window.requestAnimFrame = (function(){
@@ -202,6 +205,7 @@ limitations under the License.
       var prevY = 5.2;
 
       function draw() {
+
         //console.log("d");
         nowMs = new Date().getTime();
         dTime = nowMs-prevMs;
@@ -212,7 +216,7 @@ limitations under the License.
         dVeloc = nowVeloc - prevVeloc;
         prevVeloc = nowVeloc;
         accel = dVeloc/dTime;
-        console.log(accel);
+        //console.log(accel);
 
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
         for (var id in world) {

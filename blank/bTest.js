@@ -142,7 +142,6 @@ bTest.prototype.addRevoluteJoint = function(body1Id, body2Id, params) {
     {
         joint.EnableLimit('true');
         joint.SetLimits(params.lower, params.upper);
-        console.log(joint.IsLimitEnabled());
     }
 }
 
