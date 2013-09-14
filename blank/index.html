@@ -42,7 +42,6 @@ limitations under the License.
 	</head>
 	<body>
 		<canvas id="c0" width="800" height="600" style="border: 1px solid black"></canvas>
-		<script src="script.js"></script>
 
 		<script async>
 			// http://paulirish.com/2011/requestanimationframe-for-smart-animating/
@@ -147,8 +146,18 @@ limitations under the License.
 				ctx.rotate(this.angle);
 				ctx.translate(-(this.x) * SCALE, -(this.y) * SCALE);
 				ctx.fillStyle = this.color;
-				ctx.fillRect((this.x - this.halfWidth) * SCALE, (this.y - this.halfHeight) * SCALE, (this.halfWidth * 2) * SCALE, (this.halfHeight * 2) * SCALE);
-				ctx.restore();
+        if (this.imgsrc)
+        {
+          $('canvas').drawImage({source: this.imgsrc,
+                                x:(this.x - this.halfWidth) * SCALE,
+                                y:(this.y - this.halfHeight) * SCALE,
+                                width:(this.halfWidth * 2) * SCALE,
+                                height:(this.halfHeight * 2) * SCALE
+          });
+        }
+				else
+          ctx.fillRect((this.x - this.halfWidth) * SCALE, (this.y - this.halfHeight) * SCALE, (this.halfWidth * 2) * SCALE, (this.halfHeight * 2) * SCALE);
+        ctx.restore();
 
 				//Entity.prototype.draw.call(this, ctx);
 			}
@@ -245,21 +254,21 @@ limitations under the License.
 				y : canvasHeight / SCALE,
 				halfHeight : 1,
 				halfWidth : canvasWidth / SCALE,
-				color : 'yellow'
+				color : '#DBC696'
 			}, {
 				id : "leftwall",
 				x : 0 / SCALE,
 				y : canvasHeight * 0.75 / SCALE,
 				halfHeight : 4,
 				halfWidth : 0.5,
-				color : 'yellow'
+				color : '#DBC696'
 			}, {
 				id : "rightwall",
 				x : canvasWidth / SCALE,
 				y : canvasHeight * 0.75 / SCALE,
 				halfHeight : 4,
 				halfWidth : 0.5,
-				color : 'yellow'
+				color : '#DBC696'
 			},
 
 			//character
@@ -280,7 +289,8 @@ limitations under the License.
 				y : 7.35,
 				angle : 60,
 				halfHeight : 1.2,
-				halfWidth : 0.1
+				halfWidth : 0.1,
+        imgsrc: "character/leftarm.png"
 			}, {
 				id : "rightarm",
 				x : 7.3,
