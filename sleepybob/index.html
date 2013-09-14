@@ -264,8 +264,8 @@
 					prevVeloc = nowVeloc;
 					accel = 1000*dVeloc / dTime;
 					awakeness = Math.min(100, awakeness + .03);
-					if (Math.abs(accel) > 1)
-						awakeness = Math.max(0, awakeness -= 1 * Math.abs(accel));
+					if (Math.abs(accel) > 1.5)
+						awakeness = Math.max(0, awakeness -= 0.5 * Math.abs(accel));
 				}
 
 				ctx.clearRect(0, 0, canvasWidth, canvasHeight);
