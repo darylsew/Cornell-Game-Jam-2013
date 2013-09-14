@@ -10,13 +10,20 @@ body
     -webkit-transform: translateZ(0);
 }
 
-canvas
+#bg
 {
     margin: 0 auto;
     display: block;
     width: 800px;
     height: 600px;
-    background: #4b4b4b;
+    background: #4b4b4b url("../assets/transparentbg.png");
+    background-position: -100px -100px;
+}
+
+canvas
+{
+    background: url("../assets/transparentbg2.png");
+    background-position: -100px -100px;
 }
 
 h1
