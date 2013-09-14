@@ -215,7 +215,7 @@ limitations under the License.
       {id: "head", x: 6.5, y: 5.2, radius: 0.7},
       {id: "leftshoulder", x: 6.15, y: 6.3, radius: 0.25},
       {id: "rightshoulder", x: 6.85, y: 6.3, radius: 0.25},
-      {id: "leftarm", x: 5.7, y: 7.3, angle: 60, halfHeight: 1.2, halfWidth: 0.1},
+      {id: "leftarm", x: 5.65, y: 7.35, angle: 60, halfHeight: 1.2, halfWidth: 0.1},
       {id: "rightarm", x: 7.3, y: 7.3, angle: 50, halfHeight: 1.2, halfWidth: 0.1},
       {id: "lefthip", x: 6.15, y: 9.95, radius: 0.3},
       {id: "righthip", x: 6.85, y: 9.95, radius: 0.3},
@@ -232,15 +232,15 @@ limitations under the License.
       
       box = new bTest(60, false, canvasWidth, canvasHeight, SCALE);
       box.setBodies(world);
-      box.addRevoluteJoint("head", "torso", {lower: 0.3, upper: 0.3});
-      box.addRevoluteJoint("leftshoulder", "torso", {lower: 0.3, upper: 0.4});
-      box.addRevoluteJoint("rightshoulder", "torso", {lower: 0.3, upper: 0.4});
-      box.addRevoluteJoint("leftshoulder", "leftarm", {lower: 59.95, upper: 60.05});
-      box.addRevoluteJoint("rightshoulder", "rightarm", {lower: 3, upper: 3.1});
-      box.addRevoluteJoint("lefthip", "torso", {lower: 0.3, upper: 0.4});
-      box.addRevoluteJoint("righthip", "torso", {lower: 0.3, upper: 0.4});
-      box.addRevoluteJoint("lefthip", "leftleg", {lower: 0, upper: 0.1});
-      box.addRevoluteJoint("righthip", "rightleg", {lower: -0.1, upper: 0});
+      box.addRevoluteJoint("head", "torso", {lower: -0.1, upper: 0.1});
+      box.addRevoluteJoint("leftshoulder", "torso", {lower: 0, upper: 0});
+      box.addRevoluteJoint("rightshoulder", "torso", {lower: 0, upper: 0});
+      box.addRevoluteJoint("leftshoulder", "leftarm", {lower: 0, upper: 0});
+      box.addRevoluteJoint("rightshoulder", "rightarm", {lower: 0, upper: 0});
+      box.addRevoluteJoint("lefthip", "torso", {lower: 0, upper: 0});
+      box.addRevoluteJoint("righthip", "torso", {lower: 0, upper: 0});
+      box.addRevoluteJoint("lefthip", "leftleg", {lower: 0, upper: 0});
+      box.addRevoluteJoint("righthip", "rightleg", {lower: 0, upper: 0});
 
 /*
       b2DistanceJointDef jointDef;
