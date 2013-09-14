@@ -264,6 +264,7 @@
 
 					world[obj.id] = obj;
 					pillows++;
+					/*
 					box.registerBody({
 						id : "pillow"+pillows,
 						x : 6.5,
@@ -273,6 +274,8 @@
 						angle: -0.2,
 						imgsrc : "../static/assets/pillow.png"
 					});
+*/
+box.setBodies(world);
 				}
 			}
 
