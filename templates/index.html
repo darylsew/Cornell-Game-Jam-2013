@@ -294,12 +294,8 @@
 						awakeness = Math.max(0, awakeness -= 0.5 * Math.abs(accel));
 				}
                                 
-                ctx.save();
-                ctx.setTransform(1, 0, 0, 1, 0, 0);
-				ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.restore();
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-                ctx.translate(-1, 0);
                 backgroundPos++;
                 for (var id in world)
                 {
@@ -333,7 +329,7 @@
 				id : "ground",
 				x : canvasWidth / 2 / SCALE,
 				y : canvasHeight / SCALE,
-				halfHeight : 1,
+				halfHeight : 3,
 				halfWidth : canvasWidth * 2 / SCALE,
 				color : '#DBC696'
 			}, {
