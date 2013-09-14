@@ -225,6 +225,8 @@
 				}
 			}
 
+      var torso;
+      var lost = false;
 			var canvas = document.getElementById("c0");
 			var ctx = canvas.getContext("2d");
 			var canvasWidth = canvas.width;
@@ -407,7 +409,7 @@
 					lower : 0,
 					upper : 0
 				});
-				box.addRevoluteJoint("righthip", "torso", {
+				torso = box.addRevoluteJoint("righthip", "torso", {
 					lower : 0,
 					upper : 0
 				});
@@ -423,11 +425,14 @@
 
       function checkBounds()
       {
-          var bobx = world['torso'].x / SCALE;
-          var boby = world['torso'].y / SCALE;
-          if ((bobx<0 || bobx>1) && boby<1 )
+          if (!lost)
           {
-              lose();
+            var bobx = world['torso'].x / SCALE;
+            var boby = world['torso'].y / SCALE;
+            if ((bobx<0 || bobx>1) && boby<1 )
+            {
+                lost = true;
+            }
           }
       }
 
@@ -461,7 +466,12 @@
 					update(animStart);
 					draw();
           checkBounds();
-					requestAnimFrame(loop);
+          if (lost)
+          {
+              box.removeBody('torso');
+              delete world['torso'];
+          }
+          requestAnimFrame(loop);
 				})();
 			}, false);
 
