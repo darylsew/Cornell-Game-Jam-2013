@@ -10,12 +10,21 @@ var mousePos = {x:0,y:0};
 var backpos = backwidth/2;
 var charPos = {x:400, y:300, rad:50};
 var block = {x:900, y:380, rad:50};
+var v = {x:0,y:0};
 
 var down = false;
+var dragging = false;
 $(document).mousedown(function(){
     down = true;
+    if (dist(charPos,mousePos)<50)
+    {
+        v.x = charPos.x - mousePos.x;
+        v.y = charPos.y - mousePos.y;
+        dragging = true;
+    }
 }).mouseup(function(){
-    down = false;  
+    down = false;
+    dragging = false;
 });
 
 function draw()
@@ -29,12 +38,12 @@ function draw()
     });
 
     //character
-    if (down) attractChar();
+    if (down) dragChar();
     $("canvas").drawArc({
         strokeStyle: "#000",
         fillStyle: "red",
         strokeWidth: 2,
-        x: charPos.x, y: charPos.y,
+        x: charPos.x+backpos-backwidth/2, y: charPos.y,
         radius: charPos.rad
     });
 
@@ -55,20 +64,31 @@ function draw()
 	alert("Collision!"); 
 }
 
-function attractChar()
+function dragChar()
 {
-    var dx = (mousePos.x-charPos.x)/5;
-    var dy = (mousePos.y-charPos.y)/5;
-    if (Math.abs(charPos.x-mousePos.x)<Math.abs(dx)) charPos.x = mousePos.x;
-    else { charPos.x += dx; }
-    if (Math.abs(charPos.y-mousePos.y)<Math.abs(dy)) charPos.y = mousePos.y;
-    else { charPos.y += dy; }
+    if (dragging)
+    {
+        charPos.x = mousePos.x-backpos+backwidth/2 + v.x;
+        charPos.y = mousePos.y + v.y;
+    }
+    /*
+    var d = dist(mousePos,charPos);
+    if (d<50)
+    {
+        var dx = (mousePos.x-charPos.x)/5;
+        var dy = (mousePos.y-charPos.y)/5;
+        if (Math.abs(charPos.x-mousePos.x)<Math.abs(dx)) charPos.x = mousePos.x;
+        else { charPos.x += dx; }
+        if (Math.abs(charPos.y-mousePos.y)<Math.abs(dy)) charPos.y = mousePos.y;
+        else { charPos.y += dy; }
+    }
+    */
 }
 
 function getDbackpos()
 {
     if (!$('canvas').data('hover')) return 0;
-    var charX = charPos.x;
+    var charX = charPos.x+backpos-backwidth/2;
     charX = (charX<0) ? 0 : ((charX>800) ? 800 : charX);
     if (charX>=300 && charX<=500) return 0;
 
