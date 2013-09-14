@@ -27,7 +27,25 @@ var offsetY = 0;
 
 //testbackground
 var testbackground = document.getElementById("testbackground");
-    
+
+function collide(a,b){
+
+	var aPosition = a.position();
+	var aLeft = aPosition.left;
+	var aRight = aPosition.left + a.width(); 
+	var aTop = aPosition.top
+	var aBot = aPosition.top + a.height(); 
+
+	var bPosition = b.position();
+	var bLeft = bPosition.left;
+	var bRight = bPosition.left + b.width(); 
+	var bTop = bPosition.top;
+	var bBot = bPosition.top + b.height();
+
+	return !((aRight < bLeft) || (bRight < aLeft) || (aBot < bTop) || (bBot < aTop));
+
+}
+
 function draw() {
     ctx.drawImage(testbackground,0,0);
     ctx.save();
