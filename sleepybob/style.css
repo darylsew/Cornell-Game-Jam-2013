@@ -16,7 +16,8 @@ canvas
     display: block;
     width: 800px;
     height: 600px;
-    background: url("simplebg.png");
+    background: #4b4b4b url("transparentbg.png");
+    background-position: -100px, -200px;
 }
 
 h1
