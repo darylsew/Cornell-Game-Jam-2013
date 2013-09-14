@@ -233,22 +233,24 @@
 			var prevVeloc = 0;
 			var prevX = 6.5;
 			var prevY = 5.2;
-			var awakeness = 5;
+			var awakeness = 100;
 
 			function draw() {
-
-				//console.log("d");
-				nowMs = new Date().getTime();
-				dTime = nowMs - prevMs;
-				prevMs = nowMs;
-				nowX = box.bodiesMap.head.m_xf.position.x;
-				nowY = box.bodiesMap.head.m_xf.position.y;
-				nowVeloc = Math.pow(Math.pow(nowX - prevX, 2) + Math.pow(nowY - prevY, 2), 1 / 2);
-				dVeloc = nowVeloc - prevVeloc;
-				prevVeloc = nowVeloc;
-				accel = dVeloc / dTime;
-				awakeness = Math.min(100, awakeness+.03);
-				//console.log(accel);
+				if (awakeness > 0) {
+					//console.log("d");
+					nowMs = new Date().getTime();
+					dTime = nowMs - prevMs;
+					prevMs = nowMs;
+					nowX = box.bodiesMap.head.m_xf.position.x;
+					nowY = box.bodiesMap.head.m_xf.position.y;
+					nowVeloc = Math.pow(Math.pow(nowX - prevX, 2) + Math.pow(nowY - prevY, 2), 1 / 2);
+					dVeloc = nowVeloc - prevVeloc;
+					prevVeloc = nowVeloc;
+					accel = 1000*dVeloc / dTime;
+					awakeness = Math.min(100, awakeness + .03);
+					if (Math.abs(accel) > 10)
+						awakeness = Math.max(0, awakeness -= .05 * Math.abs(accel));
+				}
 
 				ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 				for (var id in world) {
@@ -260,7 +262,7 @@
 					x : 400,
 					y : 585,
 					width : 640 * awakeness / 100,
-					height : 20
+					height : 18
 				});
 			}
 
@@ -294,7 +296,7 @@
 				y : canvasHeight / SCALE - .5,
 				halfHeight : .3,
 				halfWidth : canvasWidth * .4 / SCALE,
-				color : "#4F0"
+				color : "#F00"
 			}, /*{
 			id : "currHP",
 			x : canvasWidth * .5 / SCALE,
