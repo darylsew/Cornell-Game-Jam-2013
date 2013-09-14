@@ -299,9 +299,9 @@
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.restore();
 
+                ctx.translate(-.05, 0);
                 for (var id in world)
                 {
-                    ctx.translate(-.05, 0);
                     var entity = world[id];
                     entity.draw(ctx);
                 }
