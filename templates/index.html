@@ -247,6 +247,7 @@
 			var prevX = 6.5;
 			var prevY = 5.2;
 			var awakeness = 100;
+			var backgroundPos;
 
 			/*
 			function makeObject(which)
@@ -298,17 +299,11 @@
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.restore();
 
-                for (var id in world) {
-                    if (isConstant(world[id])) {
-                        ctx.translate(.05, 0);
-                        var entity = world[id];
-                        entity.draw(ctx);
-                    }
-                    else {
-                        ctx.translate(-.05, 0);
-                        var entity = world[id];
-                        entity.draw(ctx);
-                    }
+                for (var id in world)
+                {
+                    ctx.translate(-.05, 0);
+                    var entity = world[id];
+                    entity.draw(ctx);
                 }
 
                 ctx.save();
