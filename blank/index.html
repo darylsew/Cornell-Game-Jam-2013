@@ -195,9 +195,23 @@ limitations under the License.
 			var ctx = canvas.getContext("2d");
 			var canvasWidth = canvas.width;
 			var canvasHeight = canvas.height;
+			var prevMs = new Date().getTime();
+			var prevVeloc = 0;
+			var prevX = 6.5;
+			var prevY = 5.2;
 
 			function draw() {
 				//console.log("d");
+				nowMs = new Date().getTime();
+				dTime = nowMs-prevMs;
+				prevMs = nowMs;
+				nowX = box.bodiesMap.head.m_xf.position.x;
+				nowY = box.bodiesMap.head.m_xf.position.y;
+				nowVeloc = Math.pow(Math.pow(nowX-prevX,2)+Math.pow(nowY-prevY,2),1/2);
+				dVeloc = nowVeloc - prevVeloc;
+				prevVeloc = nowVeloc;
+				accel = dVeloc/dTime;
+				console.log(accel);
 
 				ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 				for (var id in world) {
