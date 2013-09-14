@@ -24,8 +24,12 @@ var playerY = 20;
 // how far offset the canvas is
 var offsetX = 0;
 var offsetY = 0;
+
+//testbackground
+var testbackground = document.getElementById("testbackground");
     
 function draw() {
+    ctx.drawImage(testbackground,0,0);
     ctx.save();
     ctx.translate(offsetX, offsetY);
     // clear the viewport
