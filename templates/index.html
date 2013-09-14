@@ -36,7 +36,7 @@
 					var backx = 400 - mousePos.x;
 					var backy = 300 - mousePos.y;
 					$("canvas").drawImage({
-					  source: "{{ url_for('static', filename='assets/transparentbg.png')}}",
+					  source: "/static/assets/transparentbg.png",
 					  x: backx/10 - 100, y: backy/10 - 200
 					});
 					//url("../assets/transparentbg2.png")
