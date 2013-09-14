@@ -1,5 +1,5 @@
 var   b2Vec2 = Box2D.Common.Math.b2Vec2
- , b2AABB = Box2D.Collision.b2AABB
+, b2AABB = Box2D.Collision.b2AABB
  , b2BodyDef = Box2D.Dynamics.b2BodyDef
  , b2Body = Box2D.Dynamics.b2Body
  , b2FixtureDef = Box2D.Dynamics.b2FixtureDef
@@ -10,6 +10,7 @@ var   b2Vec2 = Box2D.Common.Math.b2Vec2
  , b2CircleShape = Box2D.Collision.Shapes.b2CircleShape
  , b2DebugDraw = Box2D.Dynamics.b2DebugDraw
  , b2RevoluteJointDef = Box2D.Dynamics.Joints.b2RevoluteJointDef
+ , b2DistanceJointDef = Box2D.Dynamics.Joints.b2DistanceJointDef
  , b2MouseJointDef =  Box2D.Dynamics.Joints.b2MouseJointDef
    ;
 
@@ -137,6 +138,45 @@ bTest.prototype.addRevoluteJoint = function(body1Id, body2Id, params) {
       joint.enableMotor = true;
     }
     this.world.CreateJoint(joint);
+}
+
+bTest.prototype.addDistanceJoint = function(body1Id, body2Id, params) {
+    var body1 = this.bodiesMap[body1Id];
+    var body2 = this.bodiesMap[body2Id];
+    var joint = new b2DistanceJointDef();
+    joint.Initialize(body1, body2, body1.GetWorldCenter(), body2.GetWorldCenter());
+    if (params && params['frequencyHz']) joint.frequencyHz = params['frequencyHz'];
+    if (params && params['dampingRatio']) joint.dampingRatio = params['dampingRatio'];
+    this.world.CreateJoint(joint);
+}
+
+bTest.prototype.applyImpulse = function(bodyId, degrees, power) {
+    var body = this.bodiesMap[bodyId];
+    body.ApplyImpulse(new b2Vec2(Math.cos(degrees * (Math.PI / 180)) * power,
+                                 Math.sin(degrees * (Math.PI / 180)) * power),
+                                 body.GetWorldCenter());
+}
+
+bTest.prototype.addContactListener = function(callbacks) {
+    var listener = new Box2D.Dynamics.b2ContactListener;
+    if (callbacks.BeginContact) listener.BeginContact = function(contact) {
+        callbacks.BeginContact(contact.GetFixtureA().GetBody().GetUserData(),
+                               contact.GetFixtureB().GetBody().GetUserData());
+    }
+    if (callbacks.EndContact) listener.EndContact = function(contact) {
+        callbacks.EndContact(contact.GetFixtureA().GetBody().GetUserData(),
+                             contact.GetFixtureB().GetBody().GetUserData());
+    }
+    if (callbacks.PostSolve) listener.PostSolve = function(contact, impulse) {
+        callbacks.PostSolve(contact.GetFixtureA().GetBody().GetUserData(),
+                             contact.GetFixtureB().GetBody().GetUserData(),
+                             impulse.normalImpulses[0]);
+    }
+    this.world.SetContactListener(listener);
+}
+
+bTest.prototype.removeBody = function(id) {
+    this.world.DestroyBody(this.bodiesMap[id]);
 }
 
 bTest.prototype.mouseDownAt = function(x, y) {

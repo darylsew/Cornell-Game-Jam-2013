@@ -209,9 +209,18 @@ limitations under the License.
     
     var initialState = [
       {id: "ground", x: canvasWidth / 2 / SCALE, y: canvasHeight * 0.9 / SCALE, halfHeight: 0.5, halfWidth: canvasWidth / SCALE, color: 'yellow'},
-      {id: "wheel1", x: 1, y: 4, radius: 1.5},
-      {id: "wheel2", x: 6, y: 4, radius: 0.5},
-      {id: "chassis", x: 3.5, y: 4, halfHeight: 0.15, halfWidth: 2.5}
+
+      //character
+      {id: "torso", x: 6.5, y: 8, halfHeight: 2, halfWidth: 0.2},
+      {id: "head", x: 6.5, y: 5.2, radius: 0.7},
+      {id: "leftshoulder", x: 6.15, y: 6.3, radius: 0.25},
+      {id: "rightshoulder", x: 6.85, y: 6.3, radius: 0.25},
+      {id: "leftarm", x: 5.7, y: 7.3, angle: 60, halfHeight: 1.2, halfWidth: 0.1},
+      {id: "rightarm", x: 7.3, y: 7.3, angle: 50, halfHeight: 1.2, halfWidth: 0.1},
+      {id: "lefthip", x: 6.15, y: 9.95, radius: 0.3},
+      {id: "righthip", x: 6.85, y: 9.95, radius: 0.3},
+      {id: "leftleg", x: 5.8, y: 11, angle: 3.3, halfHeight: 1.2, halfWidth: 0.1},
+      {id: "rightleg", x: 7.2, y: 11, angle: 2.92, halfHeight: 1.2, halfWidth: 0.1}
     ];
     
     var running = true;
@@ -223,8 +232,28 @@ limitations under the License.
       
       box = new bTest(60, false, canvasWidth, canvasHeight, SCALE);
       box.setBodies(world);
-      box.addRevoluteJoint("wheel1", "chassis", {motorSpeed: -2, maxMotorTorque: 10});
-      box.addRevoluteJoint("wheel2", "chassis");
+      box.addRevoluteJoint("head", "torso");
+      box.addRevoluteJoint("leftshoulder", "torso");
+      box.addRevoluteJoint("rightshoulder", "torso");
+      box.addRevoluteJoint("leftshoulder", "leftarm");
+      box.addRevoluteJoint("rightshoulder", "rightarm");
+      box.addRevoluteJoint("lefthip", "torso");
+      box.addRevoluteJoint("righthip", "torso");
+      box.addRevoluteJoint("lefthip", "leftleg");
+      box.addRevoluteJoint("righthip", "rightleg");
+
+/*
+      b2DistanceJointDef jointDef;
+      jointDef.Initialize("torso", "leftarm", new b2Vec2(6.5,7), new b2Vec2(6,7));
+      jointDef.collideConnected = true;
+      */
+/*
+      the_joint.Initialize("torso", "leftarm", new b2Vec2(6.5,7), new b2Vec2(6,7));
+            the_joint.collideConnected = true;
+            var joint:b2DistanceJoint = box.CreateJoint(the_joint) as b2DistanceJoint;
+            */
+
+            //box.addDistanceJoint('torso', 'leftarm', new b2Vec2(6.6,6), new b2Vec2(6.4,6));
     }
     
     /* ---- INPUT ----------------------------- */
