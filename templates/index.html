@@ -35,12 +35,8 @@
 					mousePos = getMousePos(canvas, evt);
 					var backx = 400 - mousePos.x;
 					var backy = 300 - mousePos.y;
-			    	var imageObj = new Image();
-			    	imageObj.onload = function() {
-			        	context.drawImage(imageObj, 69, 50);
-			    	};
-			    	imageObj.src = '/static/assets/transparentbg.png';
-					//url("../assets/transparentbg2.png")
+			    	$('#bg').css({'background-position-x':backx/10 - 100,'background-position-y':backy/10 - 200});
+			    	$('canvas').css({'background-position-x':backx/20 - 100,'background-position-y':backy/20 - 200});
 				}, false);
 			});
 		</script>
