@@ -264,7 +264,15 @@
 
 					world[obj.id] = obj;
 					pillows++;
-					box.registerBody(obj);
+					box.registerBody({
+						id : "pillow"+pillows,
+						x : 6.5,
+						y : 7.2,
+						halfHeight : 1,
+						halfWidth : 2,
+						angle: -0.2,
+						imgsrc : "../static/assets/pillow.png"
+					});
 				}
 			}
 
