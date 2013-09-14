@@ -420,6 +420,7 @@
             {
                 lost = true;
             }
+            if (awakeness<=0) lost = true;
           }
       }
 
@@ -453,6 +454,7 @@
 					update(animStart);
 					draw();
           checkBounds();
+
           if (lost)
           {
               box.removeBody('torso');
