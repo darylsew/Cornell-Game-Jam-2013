@@ -236,8 +236,8 @@
 				}
 			}
 
-      var torso;
-      var lost = false;
+      		var torso;
+      		var lost = false;
 			var canvas = document.getElementById("c0");
 			var ctx = canvas.getContext("2d");
 			var canvasWidth = canvas.width;
@@ -247,6 +247,22 @@
 			var prevX = 6.5;
 			var prevY = 5.2;
 			var awakeness = 100;
+
+			function makeObject(which)
+			{
+				if (which=="pillow")
+				{
+					Entity.build(
+					{
+						id : "pillow",
+						x : 6.5,
+						y : 7.2,
+						halfHeight : 1.1,
+						halfWidth : 1.2,
+						imgsrc : "../resources/pillow.png"
+					});
+				}
+			}
 
 			function draw() {
 				if (awakeness > 0) {
