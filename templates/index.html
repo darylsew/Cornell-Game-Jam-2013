@@ -526,6 +526,7 @@
 			}, true);
 
 			function handleMouseMove(e) {
+				console.log(backgroundPos)
 				mouseX = (e.clientX - canvas.getBoundingClientRect().left + backgroundPos) / SCALE;
 				mouseY = (e.clientY - canvas.getBoundingClientRect().top) / SCALE;
 				console.log(mouseX);
