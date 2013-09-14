@@ -32,7 +32,7 @@ function getDbackpos()
         vel = mouseX - 500;
     }
 
-    return vel/10;
+    return -vel/10;
 
 }
 
