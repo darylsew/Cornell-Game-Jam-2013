@@ -16,6 +16,31 @@
 		<script src="bTest.js"></script>
 		<script src="jquery.js"></script>
 		<script src="jcanvas.min.js"></script>
+
+		<script>
+			function getMousePos(canvas, evt) {
+		        var rect = canvas.getBoundingClientRect();
+		        return {
+		        	x: evt.clientX - rect.left,
+		        	y: evt.clientY - rect.top
+		        };
+		    }
+
+			$(document).ready(function(){
+				var canvas = $('canvas')[0];
+				var context = canvas.getContext('2d');
+				var mousePos = getMousePos(canvas,context);
+
+				canvas.addEventListener('mousemove', function(evt) {
+					mousePos = getMousePos(canvas, evt);
+					var backx = 400 - mousePos.x;
+					var backy = 300 - mousePos.y;
+					$('canvas').css({'background-position-x':backx/10,'background-position-y':backy/10});
+					console.log($('canvas').css("backgroundPosition"));
+				}, false);
+			});
+		</script>
+
         <style type="text/css">@import url("style.css");</style>
 
 	</head>
