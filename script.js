@@ -8,7 +8,7 @@ var deadzonewidth = 200;
 //enviornment vars
 var mousePos = {x:0,y:0};
 var backpos = backwidth/2;
-var charPos = {x:400, y:300, rad:50};
+var charPos = {x:400, y:300};
 var block = {x:900, y:380, rad:50};
 var v = {x:0,y:0};
 
@@ -49,12 +49,9 @@ function draw()
 
     //character
     if (down) dragChar();
-    $("canvas").drawArc({
-        strokeStyle: "#000",
-        fillStyle: "red",
-        strokeWidth: 2,
-        x: charPos.x+backpos-backwidth/2, y: charPos.y,
-        radius: charPos.rad
+    $("canvas").drawImage({
+        source: "resources/character/sphere.png",
+        x: charPos.x+backpos-backwidth/2, y: charPos.y, scale: 0.3
     });
 
     if (
@@ -88,7 +85,7 @@ function dragChar()
 
 function getDbackpos()
 {
-    if (!$('canvas').data('hover')) return 0;
+    //if (!$('canvas').data('hover')) return 0;
     var charX = charPos.x+backpos-backwidth/2;
     charX = (charX<0) ? 0 : ((charX>800) ? 800 : charX);
     if (charX>=300 && charX<=500) return 0;
