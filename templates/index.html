@@ -526,9 +526,9 @@
 			}, true);
 
 			function handleMouseMove(e) {
-				mouseX = (e.clientX - canvas.getBoundingClientRect().left) / SCALE;
+				mouseX = (e.clientX - canvas.getBoundingClientRect().left + backgroundPos) / SCALE;
 				mouseY = (e.clientY - canvas.getBoundingClientRect().top) / SCALE;
-				console.log(e.clientX - canvas.getBoundingClientRect().left);
+				console.log(mouseX);
 			};
 
 			/* ------------------------------------------ */
