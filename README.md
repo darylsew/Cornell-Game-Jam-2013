@@ -16,11 +16,8 @@ Cornell Game Jam 2013
 <h4 id="hunter">Hunter:</h4>
 <p></p>
 
-<h4 id="kevin">Kevin:</h4>
-<p></p>
-
 <h4 id="honwei">Hon Wei:</h4>
-<p></p>
+<p>ohaiyo</p>
 
 <h4 id="daryl">Daryl:</h4>
 <p></p>
