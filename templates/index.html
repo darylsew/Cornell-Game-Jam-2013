@@ -300,6 +300,7 @@
                 ctx.restore();
 
                 ctx.translate(-1, 0);
+                backgroundPos++;
                 for (var id in world)
                 {
                     var entity = world[id];
@@ -525,7 +526,7 @@
 			}, true);
 
 			function handleMouseMove(e) {
-				mouseX = (e.clientX - canvas.getBoundingClientRect().left) / SCALE;
+				mouseX = (e.clientX - canvas.getBoundingClientRect().left + backgroundPos) / SCALE;
 				mouseY = (e.clientY - canvas.getBoundingClientRect().top) / SCALE;
 			};
 
