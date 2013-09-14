@@ -507,9 +507,8 @@
           if (!lost)
           {
             var bobx = world['torso'].x - backgroundPos/SCALE;
-            console.log(world['torso'].y);
-            var boby = world['torso'].y / SCALE;
-            if (bobx<-2 || boby>1 )
+            var boby = world['torso'].y;
+            if (bobx<-2 || boby>16 )
             {
             	lost = true;
             }
