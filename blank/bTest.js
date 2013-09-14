@@ -137,7 +137,13 @@ bTest.prototype.addRevoluteJoint = function(body1Id, body2Id, params) {
       joint.maxMotorTorque = params.maxMotorTorque;
       joint.enableMotor = true;
     }
-    this.world.CreateJoint(joint);
+    joint = this.world.CreateJoint(joint);
+    if (params && params.lower && params.upper)
+    {
+        joint.EnableLimit('true');
+        joint.SetLimits(params.lower, params.upper);
+        console.log(joint.IsLimitEnabled());
+    }
 }
 
 bTest.prototype.addDistanceJoint = function(body1Id, body2Id, params) {
