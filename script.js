@@ -1,9 +1,8 @@
 function draw()
 {
-    $("canvas").drawArc({
-        fillStyle: "black",
-        x: 100, y: 100,
-        radius: 50
+    $("canvas").drawImage({
+        source: "resources/testbackground.jpg",
+        x: 150, y: 300
     });
 }
 
