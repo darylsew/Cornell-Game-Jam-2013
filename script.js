@@ -37,6 +37,16 @@ function draw()
         x: backpos, y: 300
     });
 
+    // Draw a polygon
+    $("canvas").drawPolygon({
+      fillStyle: "#589",
+      strokeStyle: "#000",
+      x: block.x+backpos-backwidth/2, y: block.y,
+      radius: block.rad,
+      sides: 4,
+      rotate: 0
+    });
+
     //character
     if (down) dragChar();
     $("canvas").drawArc({
@@ -47,15 +57,6 @@ function draw()
         radius: charPos.rad
     });
 
-    // Draw a polygon
-    $("canvas").drawPolygon({
-      fillStyle: "#589",
-      strokeStyle: "#000",
-      x: block.x+backpos-backwidth/2, y: block.y,
-      radius: block.rad,
-      sides: 4,
-      rotate: 0
-    });
     if (
 	isPixelCollision(context.getImageData(block.x+backpos-backwidth/2,block.y,block.rad,block.rad), block.x+backpos-backwidth/2, block.y, 
 			 context.getImageData(charPos.x,charPos.y,charPos.rad,charPos.rad),charPos.x,charPos.y,
