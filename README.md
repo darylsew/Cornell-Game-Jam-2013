@@ -1,26 +1,23 @@
 Cornell Game Jam 2013
 =====================
 
-<h1>SUBMISSION:</h1>
-<p>A side-scrolling platformer game, with a Cornell Theme.</p>
+###SUBMISSION:  
+A side-scrolling platformer game, with a Cornell Theme.
 
-<h3>Team Members:</h3>
-<ul>
-  <li><a href="#hunter">Hunter Goldstein</a></li>
-  <li><a href="#kevin">Kevin Huang</a></li>
-  <li><a href="#honwei">Hon Wei Khor</a></li>
-  <li><a href="#daryl">Daryl Sew</a></li>
-  <li><a href="#zachary">Zachary Zimmerman</a></li>
-</ul>
+###Team Members:  
+*   Hunter Goldstein
+*   Kevin Huang
+*   Hon Wei Khor
+*   Daryl Sew
+*   Zachary Zimmerman
 
-<h4 id="hunter">Hunter:</h4>
-<p></p>
+####Hunter:
 
-<h4 id="honwei">Hon Wei:</h4>
-<p>ohaiyo</p>
+####Hon Wei:
+ohaiyo  
 
-<h4 id="daryl">Daryl:</h4>
-<p></p>
+####Daryl:
+おはようございます  
 
-<h4 id="zachary">Zachary:</h4>
-<p></p>
+####Zachary:
+
