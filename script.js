@@ -8,7 +8,7 @@ var backpos = 0;
 function draw()
 {
     var newX = backpos + getDbackpos();
-    backpos = ((newX<0) ? 0 : ((newX>1600) ? 1600 : newX));
+    backpos = ((newX<0) ? 0 : ((newX>800) ? 800 : newX));
     $("canvas").drawImage({
         source: "resources/testbackground.jpg",
         x: backpos, y: 300
