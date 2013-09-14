@@ -4,6 +4,10 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Sleepy Game</title>
+    <link rel="shortcut icon" 
+      type="image/png" 
+      href="favicon.png">
+
 		<script src="Box2D.js"></script>
 		<script src="bTest.js"></script>
 		<script src="jquery.js"></script>
@@ -435,6 +439,10 @@
 					requestAnimFrame(loop);
 				})();
 			}, false);
+
+      $('canvas').hover(function(){},function(){
+        isMouseDown = false;
+      });
 
 		</script>
 	</body>
