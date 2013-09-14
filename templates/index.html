@@ -299,8 +299,12 @@
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.restore();
 
-                ctx.translate(-1, 0);
-                backgroundPos++;
+                if (backgroundPos<=45)
+                {
+                	ctx.translate(-1, 0);
+                	backgroundPos++;
+                }
+
                 for (var id in world)
                 {
                     var entity = world[id];
