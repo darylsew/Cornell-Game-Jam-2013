@@ -235,6 +235,10 @@
 			}
 
       		var torso;
+<<<<<<< HEAD:templates/index.html
+=======
+      		var pillows = 0;
+>>>>>>> master:sleepybob/index.html
       		var lost = false;
 			var canvas = document.getElementById("c0");
 			var ctx = canvas.getContext("2d");
@@ -250,6 +254,7 @@
 			{
 				if (which=="pillow")
 				{
+<<<<<<< HEAD:templates/index.html
 					Entity.build(
 					{
 						id : "pillow",
@@ -259,6 +264,20 @@
 						halfWidth : 1.2,
 						imgsrc : "../resources/pillow.png"
 					});
+=======
+					var obj = Entity.build({
+						id : "pillow"+pillows,
+						x : 6.5,
+						y : 7.2,
+						halfHeight : 1,
+						halfWidth : 2,
+						angle: -0.2,
+						imgsrc : "objects/pillow.png"
+					});
+
+					world[obj.id] = obj;
+					pillows++;
+>>>>>>> master:sleepybob/index.html
 				}
 			}
 
