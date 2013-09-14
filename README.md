@@ -12,6 +12,7 @@ A side-scrolling platformer game, with a Cornell Theme.
 *   Zachary Zimmerman
 
 ####Hunter:
+Kawaii desu ne askdlhLWADLIAOwdlLWAd
 
 ####Hon Wei:
 ohaiyo  
