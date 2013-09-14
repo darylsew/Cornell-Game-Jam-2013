@@ -270,6 +270,10 @@
 			}
 			*/
 
+                        function isConstant(e) {
+                            return e.id == 'maxHP' || e.id == 'ground';
+                        }
+
 			function draw() {
 				if (awakeness > 0) {
 					//console.log("d");
@@ -289,11 +293,30 @@
 						awakeness = Math.max(0, awakeness -= 0.5 * Math.abs(accel));
 				}
 
-				ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-				for (var id in world) {
-					var entity = world[id];
-					entity.draw(ctx);
-				}
+                                
+                                //clickX.length = 0;
+                                //clickY.length = 0;
+                                //clickDrag.length = 0;
+				//ctx.clearRect(-3*canvasWidth, -3*canvasHeight, 3*canvasWidth, 3*canvasHeight);
+
+                                
+                                ctx.save();
+                                ctx.setTransform(1, 0, 0, 1, 0, 0);
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+                                ctx.restore();
+
+                                for (var id in world) {
+                                    if (isConstant(world[id])) {
+                                        ctx.translate(.05, 0);
+                                        var entity = world[id];
+                                        entity.draw(ctx);
+                                    }
+                                    else {
+                                        ctx.translate(-.05, 0);
+                                        var entity = world[id];
+                                        entity.draw(ctx);
+                                    }
+                                }
 				$('canvas').drawRect({
 					fillStyle : "#3B5323",
 					x : 400,
@@ -301,6 +324,8 @@
 					width : 640 * awakeness / 100,
 					height : 18
 				});
+                                //ctx.restore();
+
 			}
 
 			var initialState = [
@@ -320,14 +345,14 @@
 				halfHeight : canvasHeight / SCALE,
 				halfWidth : 0.5,
 				color : '#DBC696'
-			}, {
+			}, /*{
 				id : "rightwall",
 				x : canvasWidth / SCALE + 0.5,
 				y : canvasHeight / 2 / SCALE,
 				halfHeight : canvasHeight / SCALE,
 				halfWidth : 0.5,
 				color : '#DBC696'
-			}, {
+			},*/ {
 				id : "maxHP",
 				x : canvasWidth * .5 / SCALE,
 				y : canvasHeight / SCALE - .5,
