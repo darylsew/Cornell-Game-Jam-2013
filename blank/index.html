@@ -6,7 +6,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -193,19 +193,33 @@ limitations under the License.
     }
     
     var canvas = document.getElementById("c0");
-    var ctx = canvas.getContext("2d");
-    var canvasWidth = canvas.width;
-    var canvasHeight = canvas.height;
-    
-    function draw() {
-      //console.log("d");
-      
-      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-      for (var id in world) {
-        var entity = world[id];
-        entity.draw(ctx);
+      var ctx = canvas.getContext("2d");
+      var canvasWidth = canvas.width;
+      var canvasHeight = canvas.height;
+      var prevMs = new Date().getTime();
+      var prevVeloc = 0;
+      var prevX = 6.5;
+      var prevY = 5.2;
+
+      function draw() {
+        //console.log("d");
+        nowMs = new Date().getTime();
+        dTime = nowMs-prevMs;
+        prevMs = nowMs;
+        nowX = box.bodiesMap.head.m_xf.position.x;
+        nowY = box.bodiesMap.head.m_xf.position.y;
+        nowVeloc = Math.pow(Math.pow(nowX-prevX,2)+Math.pow(nowY-prevY,2),1/2);
+        dVeloc = nowVeloc - prevVeloc;
+        prevVeloc = nowVeloc;
+        accel = dVeloc/dTime;
+        console.log(accel);
+
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        for (var id in world) {
+          var entity = world[id];
+          entity.draw(ctx);
+        }
       }
-    }
     
     var initialState = [
       
