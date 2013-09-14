@@ -27,7 +27,7 @@ limitations under the License.
     </style>
   </head>
   <body>
-    <canvas id="c0" width="640" height="480" style="border: 1px solid black"></canvas>
+    <canvas id="c0" width="800" height="600" style="border: 1px solid black"></canvas>
   
     <script async>
     // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
@@ -107,14 +107,14 @@ limitations under the License.
       ctx.beginPath();
       ctx.arc(this.x * SCALE, this.y * SCALE, this.radius * SCALE, 0, Math.PI * 2, true);
       ctx.moveTo(this.x * SCALE, this.y * SCALE);
-      ctx.lineTo((this.x) * SCALE, (this.y + this.radius) * SCALE);
+      //ctx.lineTo((this.x) * SCALE, (this.y + this.radius) * SCALE);
       ctx.closePath();
       ctx.fill();
       ctx.stroke();
       
       ctx.restore();
       
-      Entity.prototype.draw.call(this, ctx);
+      //Entity.prototype.draw.call(this, ctx);
     }
     
     function RectangleEntity(id, x, y, angle, center, color, halfWidth, halfHeight) {
@@ -137,7 +137,7 @@ limitations under the License.
                    (this.halfHeight*2) * SCALE);
       ctx.restore();
       
-      Entity.prototype.draw.call(this, ctx);
+      //Entity.prototype.draw.call(this, ctx);
     }
     
     function PolygonEntity(id, x, y, angle, center, color, polys) {
@@ -208,19 +208,23 @@ limitations under the License.
     }
     
     var initialState = [
-      {id: "ground", x: canvasWidth / 2 / SCALE, y: canvasHeight * 0.9 / SCALE, halfHeight: 0.5, halfWidth: canvasWidth / SCALE, color: 'yellow'},
+      
+      //bounds
+      {id: "ground", x: canvasWidth / 2 / SCALE, y: canvasHeight / SCALE, halfHeight: 1, halfWidth: canvasWidth / SCALE, color: 'yellow'},
+      {id: "leftwall", x: 0 / SCALE, y: canvasHeight * 0.75 / SCALE, halfHeight: 4, halfWidth: 0.5, color: 'yellow'},
+      {id: "rightwall", x: canvasWidth / 2 / SCALE, y: canvasHeight / SCALE, halfHeight: 1, halfWidth: canvasWidth / SCALE, color: 'yellow'},
 
       //character
       {id: "torso", x: 6.5, y: 8, halfHeight: 2, halfWidth: 0.2},
       {id: "head", x: 6.5, y: 5.2, radius: 0.7},
-      {id: "leftshoulder", x: 6.15, y: 6.3, radius: 0.25},
-      {id: "rightshoulder", x: 6.85, y: 6.3, radius: 0.25},
       {id: "leftarm", x: 5.65, y: 7.35, angle: 60, halfHeight: 1.2, halfWidth: 0.1},
       {id: "rightarm", x: 7.3, y: 7.3, angle: 50, halfHeight: 1.2, halfWidth: 0.1},
+      {id: "leftleg", x: 5.8, y: 11, angle: 3.3, halfHeight: 1.2, halfWidth: 0.15},
+      {id: "rightleg", x: 7.2, y: 11, angle: 2.92, halfHeight: 1.2, halfWidth: 0.15},
+      {id: "leftshoulder", x: 6.15, y: 6.3, radius: 0.25},
+      {id: "rightshoulder", x: 6.85, y: 6.3, radius: 0.25},
       {id: "lefthip", x: 6.15, y: 9.95, radius: 0.3},
-      {id: "righthip", x: 6.85, y: 9.95, radius: 0.3},
-      {id: "leftleg", x: 5.8, y: 11, angle: 3.3, halfHeight: 1.2, halfWidth: 0.1},
-      {id: "rightleg", x: 7.2, y: 11, angle: 2.92, halfHeight: 1.2, halfWidth: 0.1}
+      {id: "righthip", x: 6.85, y: 9.95, radius: 0.3}
     ];
     
     var running = true;
@@ -241,19 +245,6 @@ limitations under the License.
       box.addRevoluteJoint("righthip", "torso", {lower: 0, upper: 0});
       box.addRevoluteJoint("lefthip", "leftleg", {lower: 0, upper: 0});
       box.addRevoluteJoint("righthip", "rightleg", {lower: 0, upper: 0});
-
-/*
-      b2DistanceJointDef jointDef;
-      jointDef.Initialize("torso", "leftarm", new b2Vec2(6.5,7), new b2Vec2(6,7));
-      jointDef.collideConnected = true;
-      */
-/*
-      the_joint.Initialize("torso", "leftarm", new b2Vec2(6.5,7), new b2Vec2(6,7));
-            the_joint.collideConnected = true;
-            var joint:b2DistanceJoint = box.CreateJoint(the_joint) as b2DistanceJoint;
-            */
-
-            //box.addDistanceJoint('torso', 'leftarm', new b2Vec2(6.6,6), new b2Vec2(6.4,6));
     }
     
     /* ---- INPUT ----------------------------- */
