@@ -15,427 +15,441 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Sleepy Game</title>
-    <script src="Box2D.js"></script>
-    <script src="bTest.js"></script>
-    <script src="jquery.js"></script>
-    <script src="jcanvas.min.js"></script>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        background-color: #CEE3F6;
-        -webkit-transform: translateZ(0);
-      }
-      canvas {
-        margin: 50px auto 0 auto;
-        display: block;
-        width: 800px;
-        height: 600px;
-        background: url("simplebg.png");
-      }
-    </style>
-  </head>
-  <body>
-    <canvas id="c0" width="800" height="600" style="border: 1px solid black"></canvas>
+	<head>
+		<meta charset="utf-8">
+		<title>Sleepy Game</title>
+		<script src="Box2D.js"></script>
+		<script src="bTest.js"></script>
+		<script src="jquery.js"></script>
+		<script src="jcanvas.min.js"></script>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			body {
+				background-color: #CEE3F6;
+				-webkit-transform: translateZ(0);
+			}
+			canvas {
+				margin: 50px auto 0 auto;
+				display: block;
+				width: 800px;
+				height: 600px;
+				background: url("simplebg.png");
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="c0" width="800" height="600" style="border: 1px solid black"></canvas>
 
-    <script async>
-      // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
-      window.requestAnimFrame = (function() {
-        return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
-        function(/* function */callback, /* DOMElement */element) {
-          window.setTimeout(callback, 1000 / 60);
-        };
-      })();
-    </script>
+		<script async>
+			// http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+			window.requestAnimFrame = (function() {
+				return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+				function(/* function */callback, /* DOMElement */element) {
+					window.setTimeout(callback, 1000 / 60);
+				};
+			})();
+		</script>
 
-    <script async>
-      var SCALE = 30;
-      var NULL_CENTER = {
-        x : null,
-        y : null
-      };
+		<script async>
+			var SCALE = 30;
+			var NULL_CENTER = {
+				x : null,
+				y : null
+			};
 
-      function Entity(id, x, y, angle, center, color, imgsrc) {
-        this.id = id;
-        this.x = x;
-        this.y = y;
-        this.angle = angle || 0;
-        this.center = center;
-        this.color = color || "red";
-        this.imgsrc = imgsrc;
-      }
-
-
-      Entity.prototype.update = function(state) {
-        this.x = state.x;
-        this.y = state.y;
-        this.center = state.c;
-        this.angle = state.a;
-      }
-
-      Entity.prototype.draw = function(ctx) {
-        ctx.fillStyle = 'black';
-        ctx.beginPath();
-        ctx.arc(this.x * SCALE, this.y * SCALE, 4, 0, Math.PI * 2, true);
-        ctx.closePath();
-        ctx.fill();
-
-        ctx.fillStyle = 'yellow';
-        ctx.beginPath();
-        ctx.arc(this.center.x * SCALE, this.center.y * SCALE, 2, 0, Math.PI * 2, true);
-        ctx.closePath();
-        ctx.fill();
-      }
-
-      Entity.build = function(def) {
-        if (def.radius) {
-          return new CircleEntity(def.id, def.x, def.y, def.angle, NULL_CENTER, def.color, def.radius, def.imgsrc);
-        } else if (def.polys) {
-          return new PolygonEntity(def.id, def.x, def.y, def.angle, NULL_CENTER, def.color, def.polys, def.imgsrc);
-        } else {
-          return new RectangleEntity(def.id, def.x, def.y, def.angle, NULL_CENTER, def.color, def.halfWidth, def.halfHeight, def.imgsrc);
-        }
-      }
-      function CircleEntity(id, x, y, angle, center, color, radius, imgsrc) {
-        color = color || 'aqua';
-        Entity.call(this, id, x, y, angle, center, color, imgsrc);
-        this.radius = radius;
-      }
+			function Entity(id, x, y, angle, center, color, imgsrc) {
+				this.id = id;
+				this.x = x;
+				this.y = y;
+				this.angle = angle || 0;
+				this.center = center;
+				this.color = color || "red";
+				this.imgsrc = imgsrc;
+			}
 
 
-      CircleEntity.prototype = new Entity();
-      CircleEntity.prototype.constructor = CircleEntity;
+			Entity.prototype.update = function(state) {
+				this.x = state.x;
+				this.y = state.y;
+				this.center = state.c;
+				this.angle = state.a;
+			}
 
-      CircleEntity.prototype.draw = function(ctx) {
-        ctx.save();
-        ctx.translate(this.x * SCALE, this.y * SCALE);
-        ctx.rotate(this.angle);
-        ctx.translate(-(this.x) * SCALE, -(this.y) * SCALE);
+			Entity.prototype.draw = function(ctx) {
+				ctx.fillStyle = 'black';
+				ctx.beginPath();
+				ctx.arc(this.x * SCALE, this.y * SCALE, 4, 0, Math.PI * 2, true);
+				ctx.closePath();
+				ctx.fill();
 
-        if (this.imgsrc)
-        {
-          $('canvas').drawImage({source: this.imgsrc,
-                                x:this.x * SCALE,
-                                y:this.y * SCALE,
-                                width:this.radius * SCALE * 2,
-                                height:this.radius * SCALE * 2
-          });
-        }
-        /*
-        else
-        {
-          ctx.fillStyle = this.color;
-          ctx.strokeStyle = 'black';
-          ctx.beginPath();
-          ctx.arc(this.x * SCALE, this.y * SCALE, this.radius * SCALE, 0, Math.PI * 2, true);
-          //ctx.moveTo(this.x * SCALE, this.y * SCALE);
-          //ctx.lineTo((this.x) * SCALE, (this.y + this.radius) * SCALE);
-          ctx.closePath();
-          ctx.fill();
-          ctx.stroke();
-        }
-        */
-        
-        ctx.restore();
+				ctx.fillStyle = 'yellow';
+				ctx.beginPath();
+				ctx.arc(this.center.x * SCALE, this.center.y * SCALE, 2, 0, Math.PI * 2, true);
+				ctx.closePath();
+				ctx.fill();
+			}
 
-        //Entity.prototype.draw.call(this, ctx);
-      }
-      function RectangleEntity(id, x, y, angle, center, color, halfWidth, halfHeight, imgsrc) {
-        Entity.call(this, id, x, y, angle, center, color, imgsrc);
-        this.halfWidth = halfWidth;
-        this.halfHeight = halfHeight;
-      }
+			Entity.build = function(def) {
+				if (def.radius) {
+					return new CircleEntity(def.id, def.x, def.y, def.angle, NULL_CENTER, def.color, def.radius, def.imgsrc);
+				} else if (def.polys) {
+					return new PolygonEntity(def.id, def.x, def.y, def.angle, NULL_CENTER, def.color, def.polys, def.imgsrc);
+				} else {
+					return new RectangleEntity(def.id, def.x, def.y, def.angle, NULL_CENTER, def.color, def.halfWidth, def.halfHeight, def.imgsrc);
+				}
+			}
+			function CircleEntity(id, x, y, angle, center, color, radius, imgsrc) {
+				color = color || 'aqua';
+				Entity.call(this, id, x, y, angle, center, color, imgsrc);
+				this.radius = radius;
+			}
 
 
-      RectangleEntity.prototype = new Entity();
-      RectangleEntity.prototype.constructor = RectangleEntity;
+			CircleEntity.prototype = new Entity();
+			CircleEntity.prototype.constructor = CircleEntity;
 
-      RectangleEntity.prototype.draw = function(ctx) {
-        ctx.save();
-        ctx.translate(this.x * SCALE, this.y * SCALE);
-        ctx.rotate(this.angle);
-        ctx.translate(-(this.x) * SCALE, -(this.y) * SCALE);
-        ctx.fillStyle = this.color;
-      
-        if (this.imgsrc)
-        {
-          $('canvas').drawImage({source: this.imgsrc,
-                                x:(this.x) * SCALE,
-                                y:(this.y) * SCALE,
-                                width:(this.halfWidth * 2) * SCALE,
-                                height:(this.halfHeight * 2) * SCALE
-          });
-        }
-        else
-          ctx.fillRect((this.x - this.halfWidth) * SCALE,(this.y - this.halfHeight) * SCALE, (this.halfWidth * 2) * SCALE, (this.halfHeight * 2) * SCALE);
-        
-          ctx.restore();
+			CircleEntity.prototype.draw = function(ctx) {
+				ctx.save();
+				ctx.translate(this.x * SCALE, this.y * SCALE);
+				ctx.rotate(this.angle);
+				ctx.translate(-(this.x) * SCALE, -(this.y) * SCALE);
 
-        //Entity.prototype.draw.call(this, ctx);
-      }
-      function PolygonEntity(id, x, y, angle, center, color, polys) {
-        Entity.call(this, id, x, y, angle, center, color);
-        this.polys = polys;
-      }
+				if (this.imgsrc) {
+					$('canvas').drawImage({
+						source : this.imgsrc,
+						x : this.x * SCALE,
+						y : this.y * SCALE,
+						width : this.radius * SCALE * 2,
+						height : this.radius * SCALE * 2
+					});
+				}
+				/*
+				 else
+				 {
+				 ctx.fillStyle = this.color;
+				 ctx.strokeStyle = 'black';
+				 ctx.beginPath();
+				 ctx.arc(this.x * SCALE, this.y * SCALE, this.radius * SCALE, 0, Math.PI * 2, true);
+				 //ctx.moveTo(this.x * SCALE, this.y * SCALE);
+				 //ctx.lineTo((this.x) * SCALE, (this.y + this.radius) * SCALE);
+				 ctx.closePath();
+				 ctx.fill();
+				 ctx.stroke();
+				 }
+				 */
+
+				ctx.restore();
+
+				//Entity.prototype.draw.call(this, ctx);
+			}
+			function RectangleEntity(id, x, y, angle, center, color, halfWidth, halfHeight, imgsrc) {
+				Entity.call(this, id, x, y, angle, center, color, imgsrc);
+				this.halfWidth = halfWidth;
+				this.halfHeight = halfHeight;
+			}
 
 
-      PolygonEntity.prototype = new Entity();
-      PolygonEntity.prototype.constructor = PolygonEntity;
+			RectangleEntity.prototype = new Entity();
+			RectangleEntity.prototype.constructor = RectangleEntity;
 
-      PolygonEntity.prototype.draw = function(ctx) {
-        ctx.save();
-        ctx.translate(this.x * SCALE, this.y * SCALE);
-        ctx.rotate(this.angle);
-        ctx.translate(-(this.x) * SCALE, -(this.y) * SCALE);
-        ctx.fillStyle = this.color;
+			RectangleEntity.prototype.draw = function(ctx) {
+				ctx.save();
+				ctx.translate(this.x * SCALE, this.y * SCALE);
+				ctx.rotate(this.angle);
+				ctx.translate(-(this.x) * SCALE, -(this.y) * SCALE);
+				ctx.fillStyle = this.color;
 
-        for (var i = 0; i < this.polys.length; i++) {
-          var points = this.polys[i];
-          ctx.beginPath();
-          ctx.moveTo((this.x + points[0].x) * SCALE, (this.y + points[0].y) * SCALE);
-          for (var j = 1; j < points.length; j++) {
-            ctx.lineTo((points[j].x + this.x) * SCALE, (points[j].y + this.y) * SCALE);
-          }
-          ctx.lineTo((this.x + points[0].x) * SCALE, (this.y + points[0].y) * SCALE);
-          ctx.closePath();
-          ctx.fill();
-          ctx.stroke();
-        }
+				if (this.imgsrc) {
+					$('canvas').drawImage({
+						source : this.imgsrc,
+						x : (this.x) * SCALE,
+						y : (this.y) * SCALE,
+						width : (this.halfWidth * 2) * SCALE,
+						height : (this.halfHeight * 2) * SCALE
+					});
+				} else
+					ctx.fillRect((this.x - this.halfWidth) * SCALE, (this.y - this.halfHeight) * SCALE, (this.halfWidth * 2) * SCALE, (this.halfHeight * 2) * SCALE);
 
-        ctx.restore();
+				ctx.restore();
 
-        Entity.prototype.draw.call(this, ctx);
-      }
-      var world = {};
-      var bodiesState = null;
-      var box = null;
+				//Entity.prototype.draw.call(this, ctx);
+			}
+			function PolygonEntity(id, x, y, angle, center, color, polys) {
+				Entity.call(this, id, x, y, angle, center, color);
+				this.polys = polys;
+			}
 
-      function update(animStart) {
-        if (isMouseDown) {
-          box.mouseDownAt(mouseX, mouseY);
-        } else if (box.isMouseDown()) {
-          box.mouseUp();
-        }
 
-        box.update();
-        bodiesState = box.getState();
+			PolygonEntity.prototype = new Entity();
+			PolygonEntity.prototype.constructor = PolygonEntity;
 
-        for (var id in bodiesState) {
-          var entity = world[id];
-          if (entity)
-            entity.update(bodiesState[id]);
-        }
-      }
+			PolygonEntity.prototype.draw = function(ctx) {
+				ctx.save();
+				ctx.translate(this.x * SCALE, this.y * SCALE);
+				ctx.rotate(this.angle);
+				ctx.translate(-(this.x) * SCALE, -(this.y) * SCALE);
+				ctx.fillStyle = this.color;
 
-      var canvas = document.getElementById("c0");
-      var ctx = canvas.getContext("2d");
-      var canvasWidth = canvas.width;
-      var canvasHeight = canvas.height;
-      var prevMs = new Date().getTime();
-      var prevVeloc = 0;
-      var prevX = 6.5;
-      var prevY = 5.2;
+				for (var i = 0; i < this.polys.length; i++) {
+					var points = this.polys[i];
+					ctx.beginPath();
+					ctx.moveTo((this.x + points[0].x) * SCALE, (this.y + points[0].y) * SCALE);
+					for (var j = 1; j < points.length; j++) {
+						ctx.lineTo((points[j].x + this.x) * SCALE, (points[j].y + this.y) * SCALE);
+					}
+					ctx.lineTo((this.x + points[0].x) * SCALE, (this.y + points[0].y) * SCALE);
+					ctx.closePath();
+					ctx.fill();
+					ctx.stroke();
+				}
 
-      function draw() {
+				ctx.restore();
 
-        //console.log("d");
-        nowMs = new Date().getTime();
-        dTime = nowMs - prevMs;
-        prevMs = nowMs;
-        nowX = box.bodiesMap.head.m_xf.position.x;
-        nowY = box.bodiesMap.head.m_xf.position.y;
-        nowVeloc = Math.pow(Math.pow(nowX - prevX, 2) + Math.pow(nowY - prevY, 2), 1 / 2);
-        dVeloc = nowVeloc - prevVeloc;
-        prevVeloc = nowVeloc;
-        accel = dVeloc / dTime;
-        //console.log(accel);
+				Entity.prototype.draw.call(this, ctx);
+			}
+			var world = {};
+			var bodiesState = null;
+			var box = null;
 
-        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-        for (var id in world) {
-          var entity = world[id];
-          entity.draw(ctx);
-        }
-      }
+			function update(animStart) {
+				if (isMouseDown) {
+					box.mouseDownAt(mouseX, mouseY);
+				} else if (box.isMouseDown()) {
+					box.mouseUp();
+				}
 
-      var initialState = [
+				box.update();
+				bodiesState = box.getState();
 
-      //bounds
-      {
-        id : "ground",
-        x : canvasWidth / 2 / SCALE,
-        y : canvasHeight / SCALE,
-        halfHeight : 1,
-        halfWidth : canvasWidth / SCALE,
-        color : '#DBC696'
-      }, {
-        id : "leftwall",
-        x : 0 / SCALE,
-        y : canvasHeight * 0.75 / SCALE,
-        halfHeight : 4,
-        halfWidth : 0.5,
-        color : '#DBC696'
-      }, {
-        id : "rightwall",
-        x : canvasWidth / SCALE,
-        y : canvasHeight * 0.75 / SCALE,
-        halfHeight : 4,
-        halfWidth : 0.5,
-        color : '#DBC696'
-      },
+				for (var id in bodiesState) {
+					var entity = world[id];
+					if (entity)
+						entity.update(bodiesState[id]);
+				}
+			}
 
-      //character
-      {
-        id : "torso",
-        x : 6.5,
-        y : 7.2,
-        halfHeight : 1.1,
-        halfWidth : 1.2,
-        imgsrc: "character/body.png"
-      }, {
-        id : "head",
-        x : 6.5,
-        y : 5,
-        radius : 0.9,
-        imgsrc: "character/head.png"
-      }, {
-        id : "leftarm",
-        x : 4.2,
-        y : 6.7,
-        angle : 1.3,
-        halfHeight : 0.9,
-        halfWidth : 0.4,
-        imgsrc: "character/leftarm.png"
-      }, {
-        id : "rightarm",
-        x : 8.85,
-        y : 6.7,
-        angle : -1.3,
-        halfHeight : 0.9,
-        halfWidth : 0.4,
-        imgsrc: "character/rightarm.png"
-      }, {
-        id : "leftleg",
-        x : 5.8,
-        y : 9.5,
-        angle : 0,
-        halfHeight : 1.1,
-        halfWidth : 0.5,
-        imgsrc: "character/leftleg.png"
-      }, {
-        id : "rightleg",
-        x : 7.2,
-        y : 9.5,
-        angle : 0,
-        halfHeight : 1.1,
-        halfWidth : 0.5,
-        imgsrc: "character/rightleg.png"
-      }, {
-        id : "leftshoulder",
-        x : 5.4,
-        y : 6.4,
-        radius : 0.25
-      }, {
-        id : "rightshoulder",
-        x : 7.6,
-        y : 6.5,
-        radius : 0.25
-      }, {
-        id : "lefthip",
-        x : 5.4,
-        y : 8.2,
-        radius : 0.3
-      }, {
-        id : "righthip",
-        x : 7.6,
-        y : 8,
-        radius : 0.3
-      }];
+			var canvas = document.getElementById("c0");
+			var ctx = canvas.getContext("2d");
+			var canvasWidth = canvas.width;
+			var canvasHeight = canvas.height;
+			var prevMs = new Date().getTime();
+			var prevVeloc = 0;
+			var prevX = 6.5;
+			var prevY = 5.2;
+			var awakeness = 95;
 
-      var running = true;
+			function draw() {
 
-      function init() {
-        for (var i = 0; i < initialState.length; i++) {
-          world[initialState[i].id] = Entity.build(initialState[i]);
-        }
+				//console.log("d");
+				nowMs = new Date().getTime();
+				dTime = nowMs - prevMs;
+				prevMs = nowMs;
+				nowX = box.bodiesMap.head.m_xf.position.x;
+				nowY = box.bodiesMap.head.m_xf.position.y;
+				nowVeloc = Math.pow(Math.pow(nowX - prevX, 2) + Math.pow(nowY - prevY, 2), 1 / 2);
+				dVeloc = nowVeloc - prevVeloc;
+				prevVeloc = nowVeloc;
+				accel = dVeloc / dTime;
+				//console.log(accel);
 
-        box = new bTest(60, false, canvasWidth, canvasHeight, SCALE);
-        box.setBodies(world);
-        box.addRevoluteJoint("head", "torso", {
-          lower : -0.1,
-          upper : 0.1
-        });
-        box.addRevoluteJoint("leftshoulder", "torso", {
-          lower : 0,
-          upper : 0
-        });
-        box.addRevoluteJoint("rightshoulder", "torso", {
-          lower : 0,
-          upper : 0
-        });
-        box.addRevoluteJoint("leftshoulder", "leftarm", {
-          lower : 0,
-          upper : 0
-        });
-        box.addRevoluteJoint("rightshoulder", "rightarm", {
-          lower : 0,
-          upper : 0
-        });
-        box.addRevoluteJoint("lefthip", "torso", {
-          lower : 0,
-          upper : 0
-        });
-        box.addRevoluteJoint("righthip", "torso", {
-          lower : 0,
-          upper : 0
-        });
-        box.addRevoluteJoint("lefthip", "leftleg", {
-          lower : 0,
-          upper : 0
-        });
-        box.addRevoluteJoint("righthip", "rightleg", {
-          lower : 0,
-          upper : 0
-        });
-      }
+				ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+				for (var id in world) {
+					var entity = world[id];
+					entity.draw(ctx);
+				}
+			}
 
-      /* ---- INPUT ----------------------------- */
-      var mouseX, mouseY, isMouseDown;
+			var initialState = [
 
-      canvas.addEventListener("mousedown", function(e) {
-        isMouseDown = true;
-        handleMouseMove(e);
-        document.addEventListener("mousemove", handleMouseMove, true);
-      }, true);
+			//bounds
+			{
+				id : "ground",
+				x : canvasWidth / 2 / SCALE,
+				y : canvasHeight / SCALE,
+				halfHeight : 1,
+				halfWidth : canvasWidth / SCALE,
+				color : '#DBC696'
+			}, {
+				id : "leftwall",
+				x : 0 / SCALE,
+				y : canvasHeight * 0.75 / SCALE,
+				halfHeight : 4,
+				halfWidth : 0.5,
+				color : '#DBC696'
+			}, {
+				id : "rightwall",
+				x : canvasWidth / SCALE,
+				y : canvasHeight * 0.75 / SCALE,
+				halfHeight : 4,
+				halfWidth : 0.5,
+				color : '#DBC696'
+			}, {
+				id : "maxHP",
+				x : canvasWidth * .5 / SCALE,
+				y : canvasHeight / SCALE - .5,
+				halfHeight : .3,
+				halfWidth : canvasWidth * .4 / SCALE,
+				color : "#4F0"
+			}, {
+				id : "currHP",
+				x : canvasWidth * .5 / SCALE,
+				y : canvasHeight / SCALE - .5,
+				halfHeight : .3,
+				halfWidth : canvasWidth * .4 * awakeness / 100 / SCALE,
+				color : "#3B5323"
+			},
 
-      canvas.addEventListener("mouseup", function() {
-        document.removeEventListener("mousemove", handleMouseMove, true);
-        isMouseDown = false;
-        mouseX = undefined;
-        mouseY = undefined;
-      }, true);
+			//character
+			{
+				id : "torso",
+				x : 6.5,
+				y : 7.2,
+				halfHeight : 1.1,
+				halfWidth : 1.2,
+				imgsrc : "character/body.png"
+			}, {
+				id : "head",
+				x : 6.5,
+				y : 5,
+				radius : 0.9,
+				imgsrc : "character/head.png"
+			}, {
+				id : "leftarm",
+				x : 4.2,
+				y : 6.7,
+				angle : 1.3,
+				halfHeight : 0.9,
+				halfWidth : 0.4,
+				imgsrc : "character/leftarm.png"
+			}, {
+				id : "rightarm",
+				x : 8.85,
+				y : 6.7,
+				angle : -1.3,
+				halfHeight : 0.9,
+				halfWidth : 0.4,
+				imgsrc : "character/rightarm.png"
+			}, {
+				id : "leftleg",
+				x : 5.8,
+				y : 9.5,
+				angle : 0,
+				halfHeight : 1.1,
+				halfWidth : 0.5,
+				imgsrc : "character/leftleg.png"
+			}, {
+				id : "rightleg",
+				x : 7.2,
+				y : 9.5,
+				angle : 0,
+				halfHeight : 1.1,
+				halfWidth : 0.5,
+				imgsrc : "character/rightleg.png"
+			}, {
+				id : "leftshoulder",
+				x : 5.4,
+				y : 6.4,
+				radius : 0.25
+			}, {
+				id : "rightshoulder",
+				x : 7.6,
+				y : 6.5,
+				radius : 0.25
+			}, {
+				id : "lefthip",
+				x : 5.4,
+				y : 8.2,
+				radius : 0.3
+			}, {
+				id : "righthip",
+				x : 7.6,
+				y : 8,
+				radius : 0.3
+			}];
 
-      function handleMouseMove(e) {
-        mouseX = (e.clientX - canvas.getBoundingClientRect().left) / SCALE;
-        mouseY = (e.clientY - canvas.getBoundingClientRect().top) / SCALE;
-      };
+			var running = true;
 
-      /* ------------------------------------------ */
+			function init() {
+				for (var i = 0; i < initialState.length; i++) {
+					world[initialState[i].id] = Entity.build(initialState[i]);
+				}
 
-      document.addEventListener("DOMContentLoaded", function() {
-        init();
+				box = new bTest(60, false, canvasWidth, canvasHeight, SCALE);
+				box.setBodies(world);
+				box.addRevoluteJoint("head", "torso", {
+					lower : -0.1,
+					upper : 0.1
+				});
+				box.addRevoluteJoint("leftshoulder", "torso", {
+					lower : 0,
+					upper : 0
+				});
+				box.addRevoluteJoint("rightshoulder", "torso", {
+					lower : 0,
+					upper : 0
+				});
+				box.addRevoluteJoint("leftshoulder", "leftarm", {
+					lower : 0,
+					upper : 0
+				});
+				box.addRevoluteJoint("rightshoulder", "rightarm", {
+					lower : 0,
+					upper : 0
+				});
+				box.addRevoluteJoint("lefthip", "torso", {
+					lower : 0,
+					upper : 0
+				});
+				box.addRevoluteJoint("righthip", "torso", {
+					lower : 0,
+					upper : 0
+				});
+				box.addRevoluteJoint("lefthip", "leftleg", {
+					lower : 0,
+					upper : 0
+				});
+				box.addRevoluteJoint("righthip", "rightleg", {
+					lower : 0,
+					upper : 0
+				});
+			}
 
-        (function loop(animStart) {
-          update(animStart);
-          draw();
-          requestAnimFrame(loop);
-        })();
-      }, false);
+			/* ---- INPUT ----------------------------- */
+			var mouseX, mouseY, isMouseDown;
 
-    </script>
-  </body>
+			canvas.addEventListener("mousedown", function(e) {
+				isMouseDown = true;
+				handleMouseMove(e);
+				document.addEventListener("mousemove", handleMouseMove, true);
+			}, true);
+
+			canvas.addEventListener("mouseup", function() {
+				document.removeEventListener("mousemove", handleMouseMove, true);
+				isMouseDown = false;
+				mouseX = undefined;
+				mouseY = undefined;
+			}, true);
+
+			function handleMouseMove(e) {
+				mouseX = (e.clientX - canvas.getBoundingClientRect().left) / SCALE;
+				mouseY = (e.clientY - canvas.getBoundingClientRect().top) / SCALE;
+			};
+
+			/* ------------------------------------------ */
+
+			document.addEventListener("DOMContentLoaded", function() {
+				init();
+
+				(function loop(animStart) {
+					update(animStart);
+					draw();
+					requestAnimFrame(loop);
+				})();
+			}, false);
+
+		</script>
+	</body>
 </html>
