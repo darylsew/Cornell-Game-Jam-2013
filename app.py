@@ -1,9 +1,7 @@
 from flask import Flask, render_template
 app = Flask(__name__)
 
-@app.route('/')
-def lvl1():
-	init = """[
+init1 = """[
 
 			//bounds
 			{
@@ -131,8 +129,10 @@ def lvl1():
 				angle : -0.2,
 				imgsrc : "../static/assets/pillow.png"
 			}]"""
-	init = ' '.join(init.split())
-    return render_template('index.html',init=init)
+
+@app.route('/')
+def lvl1():
+    return render_template('index.html',init=init1)
 
 @app.route('/index2.html')
 def lvl2():
