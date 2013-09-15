@@ -105,7 +105,7 @@ bTest.prototype.setBodies = function(bodyEntities) {
         } else {
             if (entity.id.substring(0,4) == 'bird')
             {
-              bodyDef.linearVelocity = new b2Vec2(-25,0);
+              bodyDef.linearVelocity = new b2Vec2(-35,0);
             }
             bodyDef.type = b2Body.b2_dynamicBody;
         }

@@ -613,6 +613,14 @@ init[3] = """[
 				halfWidth : 1.5,
 				angle : 0,
 				imgsrc : "../static/assets/bird.png"
+			}, {
+				id : "bird3",
+				x : 40,
+				y : 12,
+				halfHeight : 1.5,
+				halfWidth : 1.5,
+				angle : 0,
+				imgsrc : "../static/assets/bird.png"
 			}]"""
 
 @app.route('/')
