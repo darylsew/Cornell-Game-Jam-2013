@@ -59,7 +59,7 @@
 
 		<div id="bg">
 			<canvas id="c0" width="800" height="600" style="border: 1px solid black"></canvas>
-			<div id="screen"></div>
+			<a id="screen"></a>
 		</div>
 
 		<script async>
@@ -319,9 +319,7 @@
 							if (name1 == "bed" || name2 == "bed") {
 								document.getElementById('audiotag1').play();
 								win = true;
-								$('#screen').css('z-index', 20).html('<div id="winscreen"><h3>YOU MADE IT TO THE BED</h3><p>All thanks to your benevolent guardian.</p><p>Next Level?</p></div>');
-								$('body').click(function() {
-									if (win) window.location.replace('/2');
+								$('#screen').css('z-index', 20).html('<div id="winscreen"><h3>YOU MADE IT TO THE BED</h3><p>All thanks to your benevolent guardian.</p><p>Next Level?</p></div>').attr("href","/2");
 								});
 							} else {
 								if (name1.indexOf("pillow") != -1) {
@@ -472,7 +470,6 @@
 				isMouseDown = true;
 				handleMouseMove(e);
 				document.addEventListener("mousemove", handleMouseMove, true);
-				if (win) this.removeEventListener('click',arguments.callee,false);
 			}, true);
 
 			canvas.addEventListener("mouseup", function() {
