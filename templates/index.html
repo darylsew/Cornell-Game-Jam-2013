@@ -3,6 +3,13 @@
 <html>
 	<head>
 
+            <audio id="audiotag1" src="../static/assets/sounds/teramount.ogg" preload="auto"></audio>
+<a href="javascript:play_single_sound();">Play 5-sec sound on single channel</a>
+<script type="text/javascript">
+	function play_single_sound() {
+		document.getElementById('audiotag1').play();
+	}
+</script>
 		<link rel="icon" href="../static/assets/favicon.ico" type="image/x-icon"/>
 		<style type="text/css">
 			@import "{{ url_for('static', filename='css/style.css')}}";
@@ -314,6 +321,8 @@
 							name2 = contact.m_fixtureB.m_body.m_userData;
 							if (name1 == "bed" || name2 == "bed") {
 									win = true;
+                                                                        document.getElementById('audiotag1').play();
+
 							}
 							cList = cList.next;
 						}
