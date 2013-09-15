@@ -100,9 +100,13 @@ bTest.prototype.setBodies = function(bodyEntities) {
     for(var id in bodyEntities) {
         var entity = bodyEntities[id];
         
-        if (entity.id == 'ground' || entity.id == 'leftwall' || entity.id == 'rightwall' || entity.id == 'maxHP' || entity.id == 'bird') {
+        if (entity.id == 'ground' || entity.id == 'leftwall' || entity.id == 'rightwall' || entity.id == 'maxHP' ) {
             bodyDef.type = b2Body.b2_staticBody;
         } else {
+            if (entity.id == 'bird')
+            {
+              bodyDef.linearVelocity = new b2Vec2(-25,0);
+            }
             bodyDef.type = b2Body.b2_dynamicBody;
         }
         
