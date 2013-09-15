@@ -20,23 +20,6 @@ body
     background-position: -100px -100px;
 }
 
-canvas
-{
-    background: url("../assets/transparentbg2.png");
-    background-position: -100px -100px;
-}
-
-#losescreen
-{   
-    position: absolute;
-    top: 91px;
-    text-align: center;
-    display: block;
-    width: 800px;
-    height: 600px;
-    background-color: rgba(1,1,1,0.6);
-}
-
 h1
 {
     display: block;
@@ -45,3 +28,34 @@ h1
     margin: 20px auto;
     background-image: url("../assets/logosmall.png");
 }
+
+canvas
+{
+    background: url("../assets/transparentbg2.png");
+    background-position: -100px -100px;
+}
+
+#screen
+{   
+    position: absolute;
+    top: 91px;
+    text-align: center;
+    display: table;
+    width: 800px;
+    height: 600px;
+    background-color: rgba(1,1,1,0.6);
+    color: white;
+}
+
+#screen > div
+{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#screen h3
+{
+    padding: 30px;
+    font-size: 50px;
+}
+
