@@ -361,6 +361,16 @@
 					width : 640 * awakeness / 100,
 					height : 18
 				});
+				if (win)
+				{
+					$("canvas").drawRect({
+						layer: true,
+						name: "losescreen",
+						fillStyle: "#666",
+						x: 60, y: 60,
+						width: 680, height: 480
+					});
+				}
 				ctx.restore();
 			}
 
@@ -557,28 +567,6 @@
 			{
 				lost = true;
 				world['head'].imgsrc = "../static/assets/character/awakehead.png";
-
-				// Create and draw a rectangle layer
-				$("canvas").drawRect({
-					layer: true,
-					name: "losescreen",
-					fillStyle: "#36c",
-					x: 0, y: 0,
-					width: 0, height: 0
-				});
-
-				// Animate layer properties
-				$("canvas").animateLayer("losescreen", {
-					x: 100, y: 150,
-					width: 400, height: 200
-				}, 1000, function(layer) {
-					// Callback function
-					$(this).animateLayer(layer, {
-				    	fillStyle: "rgb(204, 51, 51)",
-				    	x: 280, y: 100,
-				    	rotate: 360
-					}, "slow", "swing");
-				});
 			}
 
 			function win()
@@ -603,7 +591,6 @@
 			}, true);
 
 			function handleMouseMove(e) {
-				console.log(backgroundPos)
 				mouseX = (e.clientX - canvas.getBoundingClientRect().left + backgroundPos) / SCALE;
 				mouseY = (e.clientY - canvas.getBoundingClientRect().top) / SCALE;
 			};
