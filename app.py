@@ -287,11 +287,11 @@ init[1] = """[
 
 @app.route('/')
 def lvl1():
-    return render_template('index.html',init=init[num-1],num='2')
+    return render_template('index.html',init=init[0])
 
 @app.route('/2')
 def lvl2():
-    return render_template('index.html',init=init[num-1],num='1')
+    return render_template('index.html',init=init[1])
 
 if __name__ == '__main__':
     app.run(port=9998)
