@@ -1,7 +1,7 @@
 Cornell Game Jam 2013
 =====================
 
-##HOSTED AT [ml7.stuycs.org:5555](ml7.stuycs.org:5555) (courtesy of Digital Ocean)
+##HOSTED AT [http://ml7.stuycs.org:5555](http://ml7.stuycs.org:5555) (courtesy of Digital Ocean)
 ###SUBMISSION:  
 A side-scrolling platformer game, with a Cornell Theme.
 
