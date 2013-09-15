@@ -3,9 +3,9 @@
 <html>
 	<head>
 
-            <audio id="audiotag1" src="../static/assets/sounds/tada.wav" preload="auto"></audio>
-            <audio id="audiotag2" src="../static/assets/sounds/brontupisto.wav" preload="auto"></audio>
-</script>
+		<audio id="audiotag1" src="../static/assets/sounds/tada.wav" preload="auto"></audio>
+		<audio id="audiotag2" src="../static/assets/sounds/brontupisto.wav" preload="auto"></audio>
+		</script>
 		<link rel="icon" href="../static/assets/favicon.ico" type="image/x-icon"/>
 		<style type="text/css">
 			@import "{{ url_for('static', filename='css/style.css')}}";
@@ -59,8 +59,7 @@
 
 		<div id="bg">
 			<canvas id="c0" width="800" height="600" style="border: 1px solid black"></canvas>
-			<div id="screen">
-			</div>
+			<div id="screen"></div>
 		</div>
 
 		<script async>
@@ -317,12 +316,20 @@
 							contact = cList.contact;
 							name1 = contact.m_fixtureA.m_body.m_userData;
 							name2 = contact.m_fixtureB.m_body.m_userData;
-							if (name1 == "bed" || name2 == "bed")
-							{
+							if (name1 == "bed" || name2 == "bed") {
 								document.getElementById('audiotag1').play();
 								win = true;
-								$('#screen').css('z-index',20).html('<div id="winscreen"><h3>YOU MADE IT TO THE BED</h3><p>All thanks to your benevolent guardian.</p><p>Next Level?</p></div>');
-								$('#winscreen').click(function(){window.location.replace("/index2.html");});
+								$('#screen').css('z-index', 20).html('<div id="winscreen"><h3>YOU MADE IT TO THE BED</h3><p>All thanks to your benevolent guardian.</p><p>Next Level?</p></div>');
+								$('#winscreen').click(function() {
+									window.location.replace("/index2.html");
+								});
+							} else {
+								if (name1.indexOf("pillow") != -1) {
+
+								}
+								if (name2.indexOf("pillow") != -1) {
+
+								}
 							}
 							cList = cList.next;
 						}
@@ -332,31 +339,30 @@
 				ctx.save();
 				ctx.setTransform(1, 0, 0, 1, 0, 0);
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.restore();
+				ctx.restore();
 
-                $("canvas").drawImage({
-					source: "../static/assets/forest.png",
-					x: 0, y: 0,
-					width: 1600,
-					height: 600,
-					fromCenter: false
+				$("canvas").drawImage({
+					source : "../static/assets/forest.png",
+					x : 0,
+					y : 0,
+					width : 1600,
+					height : 600,
+					fromCenter : false
 				});
 
-                if (backgroundPos<=830 && !win && !lost)
-                {
-                	ctx.translate(-1, 0);
-                	backgroundPos++;
-                }
+				if (backgroundPos <= 830 && !win && !lost) {
+					ctx.translate(-1, 0);
+					backgroundPos++;
+				}
 
-                for (var id in world)
-                {
-                    var entity = world[id];
-                    entity.draw(ctx);
-                }
+				for (var id in world) {
+					var entity = world[id];
+					entity.draw(ctx);
+				}
 
-                ctx.save();
-                ctx.setTransform(1, 0, 0, 1, 0, 0);
-                $('canvas').drawRect({
+				ctx.save();
+				ctx.setTransform(1, 0, 0, 1, 0, 0);
+				$('canvas').drawRect({
 					fillStyle : "#F00",
 					x : 400,
 					y : 585,
@@ -371,17 +377,17 @@
 					height : 18
 				});
 				/*
-				if (lost)
-				{
-					$("canvas").drawRect({
-						layer: true,
-						name: "losescreen",
-						fillStyle: "rgba(1,1,1,0.6)",
-						x: 400, y: 300,
-						width: 800, height: 600
-					});
-				}
-				*/
+				 if (lost)
+				 {
+				 $("canvas").drawRect({
+				 layer: true,
+				 name: "losescreen",
+				 fillStyle: "rgba(1,1,1,0.6)",
+				 x: 400, y: 300,
+				 width: 800, height: 600
+				 });
+				 }
+				 */
 				ctx.restore();
 			}
 
@@ -568,20 +574,22 @@
 					var boby = world['torso'].y;
 					if (bobx < -4 || boby > 18) {
 
-                                        document.getElementById('audiotag2').play();
-                                        lose();
+						document.getElementById('audiotag2').play();
+						lose();
 					}
-                                        if (awakeness <= 0) lose();
-                                }
+					if (awakeness <= 0)
+						lose();
+				}
 			}
 
-			function lose()
-			{
+			function lose() {
 				document.getElementById('audiotag2').play();
 				lost = true;
 				world['head'].imgsrc = "../static/assets/character/awakehead.png";
-				$('#screen').css('z-index',20).html('<div id="losescreen"><h3>YOU WOKE UP</h3><p>Sorry this night\'s sleep was not so good.</p><p>Try Again?</p></div>');
-				$('#losescreen').click(function(){location.reload()});
+				$('#screen').css('z-index', 20).html('<div id="losescreen"><h3>YOU WOKE UP</h3><p>Sorry this night\'s sleep was not so good.</p><p>Try Again?</p></div>');
+				$('#losescreen').click(function() {
+					location.reload()
+				});
 			}
 
 			/* ---- INPUT ----------------------------- */
