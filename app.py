@@ -421,7 +421,7 @@ init[2] = """[
 				angle : 0,
 				imgsrc : "../static/assets/bird.png"
 			}, {
-				id : "bird", //Well everybody's heard, about the bird!
+				id : "bird1", //Well everybody's heard, about the bird!
 				x : 40,
 				y : 10,
 				halfHeight : 1.5,
@@ -429,7 +429,7 @@ init[2] = """[
 				angle : 0,
 				imgsrc : "../static/assets/bird.png"
 			}, {
-				id : "bird", //Well everybody's heard, about the bird!
+				id : "bird2", //Well everybody's heard, about the bird!
 				x : 40,
 				y : 16,
 				halfHeight : 1.5,
@@ -598,7 +598,7 @@ init[3] = """[
 				angle : 0,
 				imgsrc : "../static/assets/bird.png"
 			}, {
-				id : "bird",
+				id : "bird1",
 				x : 40,
 				y : 8,
 				halfHeight : 1.5,
@@ -606,7 +606,7 @@ init[3] = """[
 				angle : 0,
 				imgsrc : "../static/assets/bird.png"
 			}, {
-				id : "bird",
+				id : "bird2",
 				x : 40,
 				y : 10,
 				halfHeight : 1.5,

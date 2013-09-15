@@ -103,7 +103,7 @@ bTest.prototype.setBodies = function(bodyEntities) {
         if (entity.id == 'ground' || entity.id == 'leftwall' || entity.id == 'rightwall' || entity.id == 'maxHP' ) {
             bodyDef.type = b2Body.b2_staticBody;
         } else {
-            if (entity.id == 'bird')
+            if (entity.id.substring(0,4) == 'bird')
             {
               bodyDef.linearVelocity = new b2Vec2(-25,0);
             }
