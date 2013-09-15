@@ -53,7 +53,7 @@
 
 				$(window).keydown(function(e) {
 				  if (e.keyCode == '32') {
-				    if (win) {window.location.replace("{{next}}");}
+				    if (win) {window.location.href = "{{next}}";}
 				    if (lose) {window.location.reload();}
 				  }
 				});
