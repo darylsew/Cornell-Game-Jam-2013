@@ -49,6 +49,8 @@
 						'background-position-y' : backy / 20 - 200
 					});
 				}, false);
+
+				$('#losescreen').click(function(){location.reload()});
 			});
 		</script>
 
@@ -59,7 +61,7 @@
 		<div id="bg" z-index="5">
 			<canvas z-index="10" id="c0" width="800" height="600" style="border: 1px solid black"></canvas>
 			<div id="screen" z-index="20">
-				<div id="losescreen" onclick="window.reload()">
+				<div id="losescreen">
 					<h3>YOU WOKE UP</h3>
 					<p>Sorry this night's sleep was not so good</p>
 					<p>Try Again</p>
