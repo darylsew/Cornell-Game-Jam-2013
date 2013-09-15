@@ -573,11 +573,16 @@
 					var bobx = world['torso'].x - backgroundPos / SCALE;
 					var boby = world['torso'].y;
 					if (bobx < -4 || boby > 18) {
-						lose();
+
+                                        document.getElementById('audiotag2').play();
+                                        lose();
 					}
-					if (awakeness <= 0)
+                                        if (awakeness <= 0) {
+
+                                        document.getElementById('audiotag2').play();
 						lose();
 				}
+                                }
 			}
 
 			function lose()
