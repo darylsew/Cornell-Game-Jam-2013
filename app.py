@@ -286,7 +286,7 @@ init[1] = """[
 			}]"""
 
 @app.route('/<num>')
-def lvl(num=1):
+def lvl(num='1'):
     return render_template('index.html',init=init[num-1],num=num)
 
 if __name__ == '__main__':
