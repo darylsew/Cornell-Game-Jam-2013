@@ -3,14 +3,16 @@
 <html>
 	<head>
 
-        <link rel="icon" href="../static/assets/favicon.ico" type="image/x-icon"/>
-        <style type="text/css">@import "{{ url_for('static', filename='css/style.css')}}";</style>
-        <link rel="shortcut icon" href="../static/assets/favicon.ico" type="image/x-icon"/>
+		<link rel="icon" href="../static/assets/favicon.ico" type="image/x-icon"/>
+		<style type="text/css">
+			@import "{{ url_for('static', filename='css/style.css')}}";
+		</style>
+		<link rel="shortcut icon" href="../static/assets/favicon.ico" type="image/x-icon"/>
 		<meta charset="utf-8">
 		<title>Sleepy Bob</title>
-    <link rel="shortcut icon" 
-      type="image/png" 
-      href="favicon.png">
+		<link rel="shortcut icon"
+		type="image/png"
+		href="favicon.png">
 
 		<script src="../static/js/Box2D.js"></script>
 		<script src="../static/js/bTest.js"></script>
@@ -19,33 +21,42 @@
 
 		<script>
 			function getMousePos(canvas, evt) {
-		        var rect = canvas.getBoundingClientRect();
-		        return {
-		        	x: evt.clientX - rect.left,
-		        	y: evt.clientY - rect.top
-		        };
-		    }
+				var rect = canvas.getBoundingClientRect();
+				return {
+					x : evt.clientX - rect.left,
+					y : evt.clientY - rect.top
+				};
+			}
 
-			$(document).ready(function(){
+
+			$(document).ready(function() {
 				var canvas = $('canvas')[0];
 				var context = canvas.getContext('2d');
-				var mousePos = getMousePos(canvas,context);
+				var mousePos = getMousePos(canvas, context);
 
 				canvas.addEventListener('mousemove', function(evt) {
 					mousePos = getMousePos(canvas, evt);
 					var backx = 400 - mousePos.x;
 					var backy = 300 - mousePos.y;
-			    	$('#bg').css({'background-position-x':backx/10 - 100,'background-position-y':backy/10 - 200});
-			    	$('canvas').css({'background-position-x':backx/20 - 100,'background-position-y':backy/20 - 200});
+					$('#bg').css({
+						'background-position-x' : backx / 10 - 100,
+						'background-position-y' : backy / 10 - 200
+					});
+					$('canvas').css({
+						'background-position-x' : backx / 20 - 100,
+						'background-position-y' : backy / 20 - 200
+					});
 				}, false);
 			});
 		</script>
 
 	</head>
 	<body>
-		<h1><em>Sleepy</em> <strong>Bob</strong></h1>
+		<h1><em>Sleepy</em><strong>Bob</strong></h1>
 
-		<div id="bg"><canvas id="c0" width="800" height="600" style="border: 1px solid black"></canvas></div>
+		<div id="bg">
+			<canvas id="c0" width="800" height="600" style="border: 1px solid black"></canvas>
+		</div>
 
 		<script async>
 			// http://paulirish.com/2011/requestanimationframe-for-smart-animating/
@@ -235,9 +246,9 @@
 				}
 			}
 
-      		var torso;
-      		var pillows = 0;
-      		var lost = false;
+			var torso;
+			var pillows = 0;
+			var lost = false;
 			var canvas = document.getElementById("c0");
 			var ctx = canvas.getContext("2d");
 			var canvasWidth = canvas.width;
@@ -248,32 +259,33 @@
 			var prevY = 5.2;
 			var awakeness = 100;
 			var backgroundPos = 0;
+			var bodyParts;
 
 			/*
-			function makeObject(which)
-			{
-				if (which=="pillow")
-				{
-					var obj = Entity.build({
-						id : "pillow"+pillows,
-						x : 6.5,
-						y : 7.2,
-						halfHeight : 1,
-						halfWidth : 2,
-						angle: -0.2,
-						imgsrc : "../static/assets/pillow.png"
-					});
+			 function makeObject(which)
+			 {
+			 if (which=="pillow")
+			 {
+			 var obj = Entity.build({
+			 id : "pillow"+pillows,
+			 x : 6.5,
+			 y : 7.2,
+			 halfHeight : 1,
+			 halfWidth : 2,
+			 angle: -0.2,
+			 imgsrc : "../static/assets/pillow.png"
+			 });
 
-					world[obj.id] = obj;
-					pillows++;
-					box.setBodies(world);
-				}
+			 world[obj.id] = obj;
+			 pillows++;
+			 box.setBodies(world);
+			 }
+			 }
+			 */
+
+			function isConstant(e) {
+				return e.id == 'maxHP' || e.id == 'ground';
 			}
-			*/
-
-                        function isConstant(e) {
-                            return e.id == 'maxHP' || e.id == 'ground';
-                        }
 
 			function draw() {
 				if (awakeness > 0) {
@@ -288,46 +300,57 @@
 					prevY = nowY;
 					dVeloc = nowVeloc - prevVeloc;
 					prevVeloc = nowVeloc;
-					accel = 1000*dVeloc / dTime;
+					accel = 1000 * dVeloc / dTime;
 					awakeness = Math.min(100, awakeness + .03);
 					if (Math.abs(accel) > 1.5)
 						awakeness = Math.max(0, awakeness -= 0.5 * Math.abs(accel));
+
+					for (var i in bodyParts) {
+						cList = bodyParts[i].m_contactList;
+						while (cList != null) {
+							contact = cList.contact;
+							name1 = contact.m_fixtureA.m_body.m_userData;
+							name2 = contact.m_fixtureB.m_body.m_userData;
+							if (name1 == "bed" || name2 == "bed") {
+									console.log("WIN");
+							}
+							cList = cList.next;
+						}
+					}
 				}
-                                
-                ctx.save();
-                ctx.setTransform(1, 0, 0, 1, 0, 0);
+
+				ctx.save();
+				ctx.setTransform(1, 0, 0, 1, 0, 0);
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.restore();
+				ctx.restore();
 
-                if (backgroundPos<=830)
-                {
-                	ctx.translate(-1, 0);
-                	backgroundPos++;
-                }
+				if (backgroundPos <= 830) {
+					ctx.translate(-1, 0);
+					backgroundPos++;
+				}
 
-                for (var id in world)
-                {
-                    var entity = world[id];
-                    entity.draw(ctx);
-                }
+				for (var id in world) {
+					var entity = world[id];
+					entity.draw(ctx);
+				}
 
-                ctx.save();
-                ctx.setTransform(1, 0, 0, 1, 0, 0);
-                $('canvas').drawRect({
+				ctx.save();
+				ctx.setTransform(1, 0, 0, 1, 0, 0);
+				$('canvas').drawRect({
 					fillStyle : "#F00",
 					x : 400,
 					y : 585,
 					width : 640,
 					height : 18
 				});
-                $('canvas').drawRect({
+				$('canvas').drawRect({
 					fillStyle : "#3B5323",
 					x : 400,
 					y : 585,
 					width : 640 * awakeness / 100,
 					height : 18
 				});
-                ctx.restore();
+				ctx.restore();
 			}
 
 			var initialState = [
@@ -431,7 +454,7 @@
 				y : 16,
 				halfHeight : 2,
 				halfWidth : 3,
-				angle: 0,
+				angle : 0,
 				imgsrc : "../static/assets/bed.png"
 			}, {
 				id : "pillow1",
@@ -439,7 +462,7 @@
 				y : -100,
 				halfHeight : 1,
 				halfWidth : 2,
-				angle: -0.2,
+				angle : -0.2,
 				imgsrc : "../static/assets/pillow.png"
 			}, {
 				id : "pillow2",
@@ -447,7 +470,7 @@
 				y : -40,
 				halfHeight : 1,
 				halfWidth : 2,
-				angle: -0.2,
+				angle : -0.2,
 				imgsrc : "../static/assets/pillow.png"
 			}, {
 				id : "pillow3",
@@ -455,7 +478,7 @@
 				y : -150,
 				halfHeight : 1,
 				halfWidth : 2,
-				angle: -0.2,
+				angle : -0.2,
 				imgsrc : "../static/assets/pillow.png"
 			}];
 
@@ -465,7 +488,6 @@
 				for (var i = 0; i < initialState.length; i++) {
 					world[initialState[i].id] = Entity.build(initialState[i]);
 				}
-
 				box = new bTest(60, false, canvasWidth, canvasHeight, SCALE);
 				box.setBodies(world);
 				box.addRevoluteJoint("head", "torso", {
@@ -504,21 +526,21 @@
 					lower : 0,
 					upper : 0
 				});
+				bodyParts = [box.bodiesMap.torso, box.bodiesMap.head, box.bodiesMap.leftarm, box.bodiesMap.rightarm, box.bodiesMap.leftleg, box.bodiesMap.rightleg];
+
 			}
 
-      function checkBounds()
-      {
-          if (!lost)
-          {
-            var bobx = world['torso'].x - backgroundPos/SCALE;
-            var boby = world['torso'].y;
-            if (bobx<-4 || boby>18 )
-            {
-            	lost = true;
-            }
-            if (awakeness<=0) lost = true;
-          }
-      }
+			function checkBounds() {
+				if (!lost) {
+					var bobx = world['torso'].x - backgroundPos / SCALE;
+					var boby = world['torso'].y;
+					if (bobx < -4 || boby > 18) {
+						lost = true;
+					}
+					if (awakeness <= 0)
+						lost = true;
+				}
+			}
 
 			/* ---- INPUT ----------------------------- */
 			var mouseX, mouseY, isMouseDown;
@@ -550,21 +572,21 @@
 				(function loop(animStart) {
 					update(animStart);
 					draw();
-          checkBounds();
+					checkBounds();
 
-          if (lost)
-          {
-          		awakeness=0;
-            	box.removeBody('torso');
-            	delete world['torso'];
-          }
-          requestAnimFrame(loop);
+					if (lost) {
+						awakeness = 0;
+						box.removeBody('torso');
+						delete world['torso'];
+					}
+					requestAnimFrame(loop);
 				})();
 			}, false);
 
-      $('canvas').hover(function(){},function(){
-        isMouseDown = false;
-      });
+			$('canvas').hover(function() {
+			}, function() {
+				isMouseDown = false;
+			});
 
 		</script>
 	</body>
