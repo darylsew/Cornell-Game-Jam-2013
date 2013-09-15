@@ -50,9 +50,6 @@
 						'background-position-y' : backy / 20 - 200
 					});
 				}, false);
-
-				$('#losescreen').click(function(){location.reload()});
-				$('#winscreen').click(function(){window.location.replace("/index2.html");});
 			});
 		</script>
 
@@ -325,6 +322,7 @@
 								document.getElementById('audiotag1').play();
 								win = true;
 								$('#screen').css('z-index',20).html('<div id="winscreen"><h3>YOU MADE IT TO THE BED</h3><p>All thanks to your benevolent guardian.</p><p>Next Level?</p></div>');
+								$('#winscreen').click(function(){window.location.replace("/index2.html");});
 							}
 							cList = cList.next;
 						}
@@ -583,6 +581,7 @@
 				lost = true;
 				world['head'].imgsrc = "../static/assets/character/awakehead.png";
 				$('#screen').css('z-index',20).html('<div id="losescreen"><h3>YOU WOKE UP</h3><p>Sorry this night\'s sleep was not so good.</p><p>Try Again?</p></div>');
+				$('#losescreen').click(function(){location.reload()});
 			}
 
 			/* ---- INPUT ----------------------------- */
