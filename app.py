@@ -1,7 +1,9 @@
 from flask import Flask, render_template
 app = Flask(__name__)
 
-init1 = """[
+init = []
+
+init[0] = """[
 
 			//bounds
 			{
@@ -130,13 +132,7 @@ init1 = """[
 				imgsrc : "../static/assets/pillow.png"
 			}]"""
 
-@app.route('/')
-def lvl1():
-    return render_template('index.html',init=init1)
-
-@app.route('/index2.html')
-def lvl2():
-	init = """[
+init[1] = """[
 
 			//bounds
 			{
@@ -288,7 +284,10 @@ def lvl2():
 				angle : 0,
 				imgsrc : "../static/assets/bird.png"
 			}]"""
-	return render_template('index.html',init=init)
+
+@app.route('/<num>')
+def lvl(num=1):
+    return render_template('index.html',init=init[num-1],num=num)
 
 if __name__ == '__main__':
     app.run(port=9998)
