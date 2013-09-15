@@ -26,6 +26,15 @@ canvas
     background-position: -100px -100px;
 }
 
+#losescreen
+{   
+    text-align: center;
+    display: block;
+    width: 800px;
+    height: 600px;
+    background-color: rgba(1,1,1,0.6);
+}
+
 h1
 {
     display: block;

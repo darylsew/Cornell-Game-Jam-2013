@@ -3,8 +3,6 @@
 <html>
 	<head>
 
-            <audio id="audiotag1" src="../static/assets/sounds/teramount.ogg" preload="auto"></audio>
-</script>
 		<link rel="icon" href="../static/assets/favicon.ico" type="image/x-icon"/>
 		<style type="text/css">
 			@import "{{ url_for('static', filename='css/style.css')}}";
@@ -56,13 +54,8 @@
 	<body>
 		<h1></h1>
 
-		<div id="bg" z-index="5">
-			<canvas z-index="10" id="c0" width="800" height="600" style="border: 1px solid black"></canvas>
-			<div id="losescreen" z-index="20">
-				<h3>YOU WOKE UP</h3>
-				<p>Sorry, this night's sleep was not so good.</p>
-				<p><a>Try Again</a></p>
-			</div>
+		<div id="bg">
+			<canvas id="c0" width="800" height="600" style="border: 1px solid black"></canvas>
 		</div>
 
 		<script async>
@@ -321,9 +314,6 @@
 							name2 = contact.m_fixtureB.m_body.m_userData;
 							if (name1 == "bed" || name2 == "bed") {
 									win = true;
-                                                                        document.getElementById('audiotag1').play();
-
-									win();
 							}
 							cList = cList.next;
 						}
@@ -371,18 +361,6 @@
 					width : 640 * awakeness / 100,
 					height : 18
 				});
-				/*
-				if (lost)
-				{
-					$("canvas").drawRect({
-						layer: true,
-						name: "losescreen",
-						fillStyle: "rgba(1,1,1,0.6)",
-						x: 400, y: 300,
-						width: 800, height: 600
-					});
-				}
-				*/
 				ctx.restore();
 			}
 
@@ -513,6 +491,30 @@
 				halfWidth : 2,
 				angle : -0.2,
 				imgsrc : "../static/assets/pillow.png"
+			}, {
+				id : "pillow4",
+				x : 30,
+				y : -250,
+				halfHeight : 1,
+				halfWidth : 2,
+				angle : -0.5,
+				imgsrc : "../static/assets/pillow.png"
+			}, {
+				id : "pillow5",
+				x : 35,
+				y : -245,
+				halfHeight : 1,
+				halfWidth : 2,
+				angle : -0.5,
+				imgsrc : "../static/assets/pillow.png"
+			}, {
+				id : "bird", //Well everybody's heard, about the bird!
+				x : 50,
+				y : 500,
+				halfHeight : 1.5,
+				halfWidth : 1.5,
+				angle : 0
+				imgsrc : "../static/assets/bird.png"
 			}];
 
 			var running = true;
@@ -581,11 +583,6 @@
 				world['head'].imgsrc = "../static/assets/character/awakehead.png";
 			}
 
-			function win()
-			{
-				win = true;
-
-			}
 			/* ---- INPUT ----------------------------- */
 			var mouseX, mouseY, isMouseDown;
 
@@ -603,6 +600,7 @@
 			}, true);
 
 			function handleMouseMove(e) {
+				console.log(backgroundPos)
 				mouseX = (e.clientX - canvas.getBoundingClientRect().left + backgroundPos) / SCALE;
 				mouseY = (e.clientY - canvas.getBoundingClientRect().top) / SCALE;
 			};
