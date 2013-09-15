@@ -582,6 +582,14 @@ init[3] = """[
 				angle : -0.2,
 				imgsrc : "../static/assets/pillow.png"
 			}, {
+				id : "pillow6",
+				x : 30,
+				y : -130,
+				halfHeight : 1,
+				halfWidth : 2,
+				angle : -0.2,
+				imgsrc : "../static/assets/pillow.png"
+			}, {
 				id : "bird",
 				x : 40,
 				y : 6,
