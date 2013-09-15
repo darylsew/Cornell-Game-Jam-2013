@@ -131,6 +131,7 @@ def lvl1():
 				angle : -0.2,
 				imgsrc : "../static/assets/pillow.png"
 			}]"""
+	init = ' '.join(init.split())
     return render_template('index.html',init=init)
 
 @app.route('/index2.html')
