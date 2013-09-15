@@ -37,6 +37,7 @@ canvas
 
 #screen
 {   
+    z-index: -10;
     position: absolute;
     top: 91px;
     text-align: center;
@@ -47,15 +48,11 @@ canvas
     color: white;
 }
 
-.hide
-{
-    display: none;
-}
-
 #screen > div
 {
     display: table-cell;
     vertical-align: middle;
+    width: 800px;
 }
 
 #screen h3
