@@ -100,7 +100,7 @@ bTest.prototype.setBodies = function(bodyEntities) {
     for(var id in bodyEntities) {
         var entity = bodyEntities[id];
         
-        if (entity.id == 'ground' || entity.id == 'leftwall' || entity.id == 'rightwall' || entity.id == 'maxHP') {
+        if (entity.id == 'ground' || entity.id == 'leftwall' || entity.id == 'rightwall' || entity.id == 'maxHP' || entity.id == 'bird') {
             bodyDef.type = b2Body.b2_staticBody;
         } else {
             bodyDef.type = b2Body.b2_dynamicBody;
