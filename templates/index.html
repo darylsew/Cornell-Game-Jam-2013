@@ -248,6 +248,7 @@
 
 			var torso;
 			var pillows = 0;
+			var win = false;
 			var lost = false;
 			var canvas = document.getElementById("c0");
 			var ctx = canvas.getContext("2d");
@@ -312,7 +313,7 @@
 							name1 = contact.m_fixtureA.m_body.m_userData;
 							name2 = contact.m_fixtureB.m_body.m_userData;
 							if (name1 == "bed" || name2 == "bed") {
-									console.log("WIN");
+									win = true;
 							}
 							cList = cList.next;
 						}
@@ -332,7 +333,7 @@
 					fromCenter: false
 				});
 
-                if (backgroundPos<=830)
+                if (backgroundPos<=830 && !win && !lost)
                 {
                 	ctx.translate(-1, 0);
                 	backgroundPos++;
@@ -541,7 +542,7 @@
 			}
 
 			function checkBounds() {
-				if (!lost) {
+				if (!lost && !win) {
 					var bobx = world['torso'].x - backgroundPos / SCALE;
 					var boby = world['torso'].y;
 					if (bobx < -4 || boby > 18) {
