@@ -29,6 +29,7 @@ canvas
 h1
 {
     width: 500px;
+    height: 71px;
     margin: 0 auto;
 	padding: 20px 0;
     background-image: url("../assets/logosmall.png");
