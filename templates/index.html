@@ -313,7 +313,7 @@
 							name1 = contact.m_fixtureA.m_body.m_userData;
 							name2 = contact.m_fixtureB.m_body.m_userData;
 							if (name1 == "bed" || name2 == "bed") {
-									win = true;
+									win();
 							}
 							cList = cList.next;
 						}
@@ -557,8 +557,35 @@
 			{
 				lost = true;
 				world['head'].imgsrc = "../static/assets/character/awakehead.png";
+
+				// Create and draw a rectangle layer
+				$("canvas").drawRect({
+					layer: true,
+					name: "losescreen",
+					fillStyle: "#36c",
+					x: 0, y: 0,
+					width: 0, height: 0
+				});
+
+				// Animate layer properties
+				$("canvas").animateLayer("losescreen", {
+					x: 100, y: 150,
+					width: 400, height: 200
+				}, 1000, function(layer) {
+					// Callback function
+					$(this).animateLayer(layer, {
+				    	fillStyle: "rgb(204, 51, 51)",
+				    	x: 280, y: 100,
+				    	rotate: 360
+					}, "slow", "swing");
+				});
 			}
 
+			function win()
+			{
+				win = true;
+
+			}
 			/* ---- INPUT ----------------------------- */
 			var mouseX, mouseY, isMouseDown;
 
