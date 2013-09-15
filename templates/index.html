@@ -59,9 +59,9 @@
 	<body>
 		<h1></h1>
 
-		<div id="bg" z-index="5">
-			<canvas z-index="10" id="c0" width="800" height="600" style="border: 1px solid black"></canvas>
-			<div id="screen" z-index="20">
+		<div id="bg">
+			<canvas id="c0" width="800" height="600" style="border: 1px solid black"></canvas>
+			<div id="screen">
 				<div id="losescreen">
 					<h3>YOU WOKE UP</h3>
 					<p>Sorry this night's sleep was not so good</p>
@@ -589,11 +589,17 @@
 			{
 				lost = true;
 				world['head'].imgsrc = "../static/assets/character/awakehead.png";
+				$('#screen').css('z-index',20);
+				$('#losescreen').css('z-index',25);
+				$('#winscreen').css('z-index',-10);
 			}
 
 			function win()
 			{
 				win = true;
+				$('#screen').css('z-index',20);
+				$('#winscreen').css('z-index',25);
+				$('#losescreen').css('z-index',-10);
 
 			}
 			/* ---- INPUT ----------------------------- */
