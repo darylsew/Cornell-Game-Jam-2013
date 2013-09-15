@@ -443,10 +443,10 @@ init[3] = """[
 			//bounds
 			{
 				id : "ground",
-				x : canvasWidth * 2 / SCALE,
+				x : canvasWidth / SCALE,
 				y : canvasHeight / SCALE,
 				halfHeight : 1,
-				halfWidth : canvasWidth * 2 / SCALE,
+				halfWidth : canvasWidth / SCALE,
 				color : '#DBC696'
 			}, {
 				id : "leftwall",
@@ -457,7 +457,7 @@ init[3] = """[
 				color : '#DBC696'
 			}, {
 				id : "rightwall",
-				x : canvasWidth * 4 / SCALE + 0.5,
+				x : canvasWidth * 2 / SCALE + 0.5,
 				y : canvasHeight / 2 / SCALE,
 				halfHeight : canvasHeight / SCALE,
 				halfWidth : 0.5,
@@ -535,7 +535,7 @@ init[3] = """[
 			//objects
 			{
 				id : "bed",
-				x : 100,
+				x : 50,
 				y : 16,
 				halfHeight : 2,
 				halfWidth : 3,
@@ -543,15 +543,15 @@ init[3] = """[
 				imgsrc : "../static/assets/bed.png"
 			}, {
 				id : "pillow1",
-				x : 30,
-				y : -150,
+				x : 10,
+				y : -200,
 				halfHeight : 1,
 				halfWidth : 2,
 				angle : -0.2,
 				imgsrc : "../static/assets/pillow.png"
 			}, {
 				id : "pillow2",
-				x : 35,
+				x : 14,
 				y : -200,
 				halfHeight : 1,
 				halfWidth : 2,
@@ -559,14 +559,30 @@ init[3] = """[
 				imgsrc : "../static/assets/pillow.png"
 			}, {
 				id : "pillow3",
-				x : 40,
-				y : -300,
+				x : 18,
+				y : -200,
 				halfHeight : 1,
 				halfWidth : 2,
 				angle : -0.2,
 				imgsrc : "../static/assets/pillow.png"
 			}, {
-				id : "bird", //Well everybody's heard, about the bird!
+				id : "pillow4",
+				x : 22,
+				y : -200,
+				halfHeight : 1,
+				halfWidth : 2,
+				angle : -0.2,
+				imgsrc : "../static/assets/pillow.png"
+			}, {
+				id : "pillow5",
+				x : 26,
+				y : -200,
+				halfHeight : 1,
+				halfWidth : 2,
+				angle : -0.2,
+				imgsrc : "../static/assets/pillow.png"
+			}, {
+				id : "bird",
 				x : 40,
 				y : 6,
 				halfHeight : 1.5,
@@ -574,17 +590,17 @@ init[3] = """[
 				angle : 0,
 				imgsrc : "../static/assets/bird.png"
 			}, {
-				id : "bird1", //Well everybody's heard, about the bird!
+				id : "bird1",
 				x : 40,
-				y : 10,
+				y : 8,
 				halfHeight : 1.5,
 				halfWidth : 1.5,
 				angle : 0,
 				imgsrc : "../static/assets/bird.png"
 			}, {
-				id : "bird2", //Well everybody's heard, about the bird!
+				id : "bird2",
 				x : 40,
-				y : 16,
+				y : 10,
 				halfHeight : 1.5,
 				halfWidth : 1.5,
 				angle : 0,
