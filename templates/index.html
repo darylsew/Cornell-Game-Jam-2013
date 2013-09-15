@@ -63,16 +63,6 @@
 		<div id="bg">
 			<canvas id="c0" width="800" height="600" style="border: 1px solid black"></canvas>
 			<div id="screen">
-				<div id="losescreen">
-					<h3>YOU WOKE UP</h3>
-					<p>Sorry this night's sleep was not so good.</p>
-					<p>Try Again?</p>
-				</div>
-				<div id="winscreen">
-					<h3>YOU MADE IT TO THE BED</h3>
-					<p>All thanks to your benevolent guardian.</p>
-					<p>Next Level?</p>
-				</div>
 			</div>
 		</div>
 
@@ -595,17 +585,13 @@
 			{
 				lost = true;
 				world['head'].imgsrc = "../static/assets/character/awakehead.png";
-				$('#screen').css('z-index',20);
-				$('#losescreen').css('z-index',25);
-				$('#winscreen').css('z-index',0);
+				$('#screen').css('z-index',20).html('<div id="winscreen"><h3>YOU MADE IT TO THE BED</h3><p>All thanks to your benevolent guardian.</p><p>Next Level?</p></div>');
 			}
 
 			function win()
 			{
 				win = true;
-				$('#screen').css('z-index',20);
-				$('#winscreen').css('z-index',25);
-				$('#losescreen').css('z-index',0);
+				$('#screen').css('z-index',20).html('<div id="winscreen"><h3>YOU MADE IT TO THE BED</h3><p>All thanks to your benevolent guardian.</p><p>Next Level?</p></div>');
 
 			}
 			/* ---- INPUT ----------------------------- */

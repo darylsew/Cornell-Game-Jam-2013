@@ -48,16 +48,6 @@ canvas
     color: white;
 }
 
-#losescreen
-{
-    z-index: -9;
-}
-
-.hide
-{
-    display: none;
-}
-
 #screen > div
 {
     display: table-cell;
