@@ -131,7 +131,7 @@ def lvl1():
 				angle : -0.2,
 				imgsrc : "../static/assets/pillow.png"
 			}]"""
-    return render_template('index.html',init)
+    return render_template('index.html',init=init)
 
 @app.route('/index2.html')
 def lvl2():
@@ -287,7 +287,7 @@ def lvl2():
 				angle : 0,
 				imgsrc : "../static/assets/bird.png"
 			}]"""
-	return render_template('index.html',init)
+	return render_template('index.html',init=init)
 
 if __name__ == '__main__':
     app.run(port=9998)
