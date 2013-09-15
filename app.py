@@ -822,7 +822,11 @@ def lvl3():
 
 @app.route('/4')
 def lvl4():
-    return render_template('index.html',init=init[3],next='/')
+    return render_template('index.html',init=init[3],next='5')
+
+@app.route('/5')
+def lvl5():
+    return render_template('index.html',init=init[4],next='/')
 
 if __name__ == '__main__':
     app.run(port=9998)
