@@ -50,6 +50,13 @@
 						'background-position-y' : backy / 20 - 200
 					});
 				}, false);
+
+				$(window).keypress(function(e) {
+				  if (e.keyCode == 0) {
+				    if (win) {window.location.replace("{{next}}");}
+				    if (lose) {window.location.reload();}
+				  }
+				});
 			});
 		</script>
 
@@ -319,7 +326,7 @@
 							if (name1 == "bed" || name2 == "bed") {
 								document.getElementById('audiotag1').play();
 								win = true;
-								$('#screen').css('z-index', 20).html('<div id="winscreen"><h3>YOU MADE IT TO THE BED</h3><p>All thanks to your benevolent guardian.</p><p>Next Level?</p></div>').attr("href","{{next}}");
+								$('#screen').css('z-index', 20).html('<div id="winscreen"><h3>YOU MADE IT TO THE BED</h3><p>All thanks to your benevolent guardian.</p><p>Next Level? Press Space.</p></div>');
 							} else {
 								if (name1.indexOf("pillow") != -1) {
 
@@ -456,10 +463,7 @@
 				document.getElementById('audiotag2').play();
 				lost = true;
 				world['head'].imgsrc = "../static/assets/character/awakehead.png";
-				$('#screen').css('z-index', 20).html('<div id="losescreen"><h3>YOU WOKE UP</h3><p>Sorry this night\'s sleep was not so good.</p><p>Try Again?</p></div>');
-				$('#losescreen').click(function() {
-					location.reload()
-				});
+				$('#screen').css('z-index', 20).html('<div id="losescreen"><h3>YOU WOKE UP</h3><p>Sorry this night\'s sleep was not so good.</p><p>Try Again? Press Space.</p></div>');
 			}
 
 			/* ---- INPUT ----------------------------- */
