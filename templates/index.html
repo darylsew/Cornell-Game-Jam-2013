@@ -472,6 +472,7 @@
 				isMouseDown = true;
 				handleMouseMove(e);
 				document.addEventListener("mousemove", handleMouseMove, true);
+				if (win) this.removeEventListener('click',arguments.callee,false);
 			}, true);
 
 			canvas.addEventListener("mouseup", function() {
