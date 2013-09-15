@@ -324,6 +324,14 @@
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.restore();
 
+                $("canvas").drawImage({
+					source: "../static/assets/forest.png",
+					x: 0, y: 0,
+					width: 1600,
+					height: 600,
+					fromCenter: false
+				});
+
                 if (backgroundPos<=830)
                 {
                 	ctx.translate(-1, 0);
@@ -335,14 +343,6 @@
                     var entity = world[id];
                     entity.draw(ctx);
                 }
-
-                $("canvas").drawImage({
-					source: "../static/assets/forest.png",
-					x: 0, y: 0,
-					width: 1600,
-					height: 600,
-					fromCenter: false
-				});
 
                 ctx.save();
                 ctx.setTransform(1, 0, 0, 1, 0, 0);
