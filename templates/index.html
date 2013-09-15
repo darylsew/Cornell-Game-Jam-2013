@@ -299,8 +299,12 @@
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.restore();
 
-                ctx.translate(-1, 0);
-                backgroundPos++;
+                if (backgroundPos<=830)
+                {
+                	ctx.translate(-1, 0);
+                	backgroundPos++;
+                }
+
                 for (var id in world)
                 {
                     var entity = world[id];
@@ -331,10 +335,10 @@
 			//bounds
 			{
 				id : "ground",
-				x : canvasWidth / 2 / SCALE,
+				x : canvasWidth / SCALE,
 				y : canvasHeight / SCALE,
 				halfHeight : 1,
-				halfWidth : canvasWidth * 2 / SCALE,
+				halfWidth : canvasWidth / SCALE,
 				color : '#DBC696'
 			}, {
 				id : "leftwall",
@@ -423,7 +427,7 @@
 			//objects
 			{
 				id : "bed",
-				x : 45,
+				x : 50,
 				y : 16,
 				halfHeight : 2,
 				halfWidth : 3,
@@ -506,12 +510,11 @@
       {
           if (!lost)
           {
-            var bobx = (world['torso'].x - backgroundPos) / SCALE;
-            console.log(bobx);
-            var boby = world['torso'].y / SCALE;
-            if (bobx<0 || boby>1 )
+            var bobx = world['torso'].x - backgroundPos/SCALE;
+            var boby = world['torso'].y;
+            if (bobx<-4 || boby>18 )
             {
-                lost = true;
+            	lost = true;
             }
             if (awakeness<=0) lost = true;
           }
