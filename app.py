@@ -777,7 +777,7 @@ init[4] = """[
 			}, {
 				id : "bird",
 				x : 40,
-				y : 10,
+				y : 8,
 				halfHeight : 1.5,
 				halfWidth : 1.5,
 				angle : 0,
@@ -785,7 +785,7 @@ init[4] = """[
 			}, {
 				id : "bird1",
 				x : 34,
-				y : 10,
+				y : 8,
 				halfHeight : 1.5,
 				halfWidth : 1.5,
 				angle : 0,
@@ -793,7 +793,7 @@ init[4] = """[
 			}, {
 				id : "bird2",
 				x : 30,
-				y : 10,
+				y : 8,
 				halfHeight : 1.5,
 				halfWidth : 1.5,
 				angle : 0,
@@ -801,7 +801,7 @@ init[4] = """[
 			}, {
 				id : "bird3",
 				x : 20,
-				y : 10,
+				y : 8,
 				halfHeight : 1.5,
 				halfWidth : 1.5,
 				angle : 0,
