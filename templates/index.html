@@ -583,11 +583,17 @@
 			{
 				lost = true;
 				world['head'].imgsrc = "../static/assets/character/awakehead.png";
+				$('#screen').css('z-index',20);
+				$('#losescreen').css('z-index',25);
+				$('#winscreen').css('z-index',-10);
 			}
 
 			function win()
 			{
 				win = true;
+				$('#screen').css('z-index',20);
+				$('#winscreen').css('z-index',25);
+				$('#losescreen').css('z-index',-10);
 
 			}
 			/* ---- INPUT ----------------------------- */
