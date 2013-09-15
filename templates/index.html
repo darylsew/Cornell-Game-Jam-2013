@@ -323,6 +323,7 @@
 									win = true;
                                                                         document.getElementById('audiotag1').play();
 
+									win();
 							}
 							cList = cList.next;
 						}
@@ -370,6 +371,17 @@
 					width : 640 * awakeness / 100,
 					height : 18
 				});
+				if (lose)
+				{
+					alert('hi')
+					$("canvas").drawRect({
+						layer: true,
+						name: "losescreen",
+						fillStyle: "#666",
+						x: 60, y: 60,
+						width: 680, height: 480
+					});
+				}
 				ctx.restore();
 			}
 
@@ -555,13 +567,24 @@
 					var bobx = world['torso'].x - backgroundPos / SCALE;
 					var boby = world['torso'].y;
 					if (bobx < -4 || boby > 18) {
-						lost = true;
+						lose();
 					}
 					if (awakeness <= 0)
-						lost = true;
+						lose();
 				}
 			}
 
+			function lose()
+			{
+				lost = true;
+				world['head'].imgsrc = "../static/assets/character/awakehead.png";
+			}
+
+			function win()
+			{
+				win = true;
+
+			}
 			/* ---- INPUT ----------------------------- */
 			var mouseX, mouseY, isMouseDown;
 
@@ -579,7 +602,6 @@
 			}, true);
 
 			function handleMouseMove(e) {
-				console.log(backgroundPos)
 				mouseX = (e.clientX - canvas.getBoundingClientRect().left + backgroundPos) / SCALE;
 				mouseY = (e.clientY - canvas.getBoundingClientRect().top) / SCALE;
 			};
