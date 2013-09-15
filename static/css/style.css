@@ -28,7 +28,10 @@ canvas
 
 h1
 {
-	width: 100%;
 	text-align: center;
 	padding: 20px 0;
+        background-image: url("../assets/logo.png");
+        background-size: 
+        height: 20px;
+        width: auto;
 }
