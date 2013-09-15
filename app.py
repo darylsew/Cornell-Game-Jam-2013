@@ -544,7 +544,7 @@ init[3] = """[
 			}, {
 				id : "pillow1",
 				x : 10,
-				y : -160,
+				y : -130,
 				halfHeight : 1,
 				halfWidth : 2,
 				angle : -0.2,
@@ -552,7 +552,7 @@ init[3] = """[
 			}, {
 				id : "pillow2",
 				x : 14,
-				y : -160,
+				y : -130,
 				halfHeight : 1,
 				halfWidth : 2,
 				angle : -0.2,
@@ -560,7 +560,7 @@ init[3] = """[
 			}, {
 				id : "pillow3",
 				x : 18,
-				y : -160,
+				y : -130,
 				halfHeight : 1,
 				halfWidth : 2,
 				angle : -0.2,
@@ -568,7 +568,7 @@ init[3] = """[
 			}, {
 				id : "pillow4",
 				x : 22,
-				y : -160,
+				y : -130,
 				halfHeight : 1,
 				halfWidth : 2,
 				angle : -0.2,
@@ -576,7 +576,7 @@ init[3] = """[
 			}, {
 				id : "pillow5",
 				x : 26,
-				y : -160,
+				y : -130,
 				halfHeight : 1,
 				halfWidth : 2,
 				angle : -0.2,
