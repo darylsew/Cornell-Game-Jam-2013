@@ -546,11 +546,17 @@
 					var bobx = world['torso'].x - backgroundPos / SCALE;
 					var boby = world['torso'].y;
 					if (bobx < -4 || boby > 18) {
-						lost = true;
+						lose();
 					}
 					if (awakeness <= 0)
-						lost = true;
+						lose();
 				}
+			}
+
+			function lose()
+			{
+				lost = true;
+				world['head'].imgsrc = "../static/assets/character/awakehead.png";
 			}
 
 			/* ---- INPUT ----------------------------- */
