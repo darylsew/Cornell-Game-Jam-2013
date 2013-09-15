@@ -47,6 +47,11 @@ canvas
     color: white;
 }
 
+.hide
+{
+    display: none;
+}
+
 #screen > div
 {
     display: table-cell;
