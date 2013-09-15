@@ -52,11 +52,7 @@
 
 	</head>
 	<body>
-<<<<<<< HEAD
-		<h1><em>Sleepy</em><strong>Bob</strong></h1>
-=======
 		<h1></h1>
->>>>>>> cb7ae0afdfe46a2f4bc018bed5e8e9b79497674f
 
 		<div id="bg">
 			<canvas id="c0" width="800" height="600" style="border: 1px solid black"></canvas>
@@ -326,21 +322,31 @@
 				ctx.save();
 				ctx.setTransform(1, 0, 0, 1, 0, 0);
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
-				ctx.restore();
+                ctx.restore();
 
-				if (backgroundPos <= 830) {
-					ctx.translate(-1, 0);
-					backgroundPos++;
-				}
+                $("canvas").drawImage({
+					source: "../static/assets/forest.png",
+					x: 0, y: 0,
+					width: 1600,
+					height: 600,
+					fromCenter: false
+				});
 
-				for (var id in world) {
-					var entity = world[id];
-					entity.draw(ctx);
-				}
+                if (backgroundPos<=830)
+                {
+                	ctx.translate(-1, 0);
+                	backgroundPos++;
+                }
 
-				ctx.save();
-				ctx.setTransform(1, 0, 0, 1, 0, 0);
-				$('canvas').drawRect({
+                for (var id in world)
+                {
+                    var entity = world[id];
+                    entity.draw(ctx);
+                }
+
+                ctx.save();
+                ctx.setTransform(1, 0, 0, 1, 0, 0);
+                $('canvas').drawRect({
 					fillStyle : "#F00",
 					x : 400,
 					y : 585,
