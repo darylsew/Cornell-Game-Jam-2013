@@ -320,7 +320,12 @@
 							contact = cList.contact;
 							name1 = contact.m_fixtureA.m_body.m_userData;
 							name2 = contact.m_fixtureB.m_body.m_userData;
-							if (name1 == "bed" || name2 == "bed") win();
+							if (name1 == "bed" || name2 == "bed")
+							{
+								document.getElementById('audiotag1').play();
+								win = true;
+								$('#screen').css('z-index',20).html('<div id="winscreen"><h3>YOU MADE IT TO THE BED</h3><p>All thanks to your benevolent guardian.</p><p>Next Level?</p></div>');
+							}
 							cList = cList.next;
 						}
 					}
@@ -580,13 +585,6 @@
 				$('#screen').css('z-index',20).html('<div id="losescreen"><h3>YOU WOKE UP</h3><p>Sorry this night\'s sleep was not so good.</p><p>Try Again?</p></div>');
 			}
 
-			function win()
-			{
-				document.getElementById('audiotag1').play();
-				win = true;
-				$('#screen').css('z-index',20).html('<div id="winscreen"><h3>YOU MADE IT TO THE BED</h3><p>All thanks to your benevolent guardian.</p><p>Next Level?</p></div>');
-
-			}
 			/* ---- INPUT ----------------------------- */
 			var mouseX, mouseY, isMouseDown;
 
