@@ -1,25 +1,19 @@
 Cornell Game Jam 2013
 =====================
 
-##HOSTED AT [http://ml7.stuycs.org:5555](http://ml7.stuycs.org:5555) (courtesy of Digital Ocean)
-###SUBMISSION:  
-A side-scrolling platformer game, with a Cornell Theme.
+##Dependencies:
+sudo apt-get install python
+sudo apt-get install python-pip
+sudo pip install Flask
+
+Then python app.py to run the game.
 
 ###Team Members:  
 *   Hunter Goldstein
-*   Kevin Huang
+*   Emily Skrutskie
 *   Hon Wei Khor
 *   Daryl Sew
 *   Zachary Zimmerman
 
-####Hunter:
-Kawaii desu ne askdlhLWADLIAOwdlLWAd
 
-####Hon Wei:
-ohaiyo  
-
-####Daryl:
-おはようございます  
-
-####Zachary:
 
