@@ -1,5 +1,6 @@
 Cornell Game Jam 2013
 =====================
+###See http://www.youtube.com/watch?v=py8T\_S0Uzxw for a video demo.
 
 ##Dependencies:
 sudo apt-get install python  
@@ -14,6 +15,3 @@ Then python app.py to run the game.
 *   Hon Wei Khor
 *   Daryl Sew
 *   Zachary Zimmerman
-
-
-
